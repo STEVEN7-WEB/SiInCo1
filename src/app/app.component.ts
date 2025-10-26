@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { InicioSesionComponent } from '../Components/inicio-sesion/inicio-sesion.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, InicioSesionComponent], // ← Importa aquí
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
+
 })
-export class AppComponent {
-  title = 'SiInCo1';
-}
+export class AppComponent {}

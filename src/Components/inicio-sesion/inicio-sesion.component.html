@@ -1,10 +1,38 @@
-<h2>Iniciar Sesión</h2>
-<form>
-  <label for="usuario">Usuario:</label>
-  <input type="text" id="usuario" name="usuario" />
-  
-  <label for="password">Contraseña:</label>
-  <input type="password" id="password" name="password" />
-  
-  <button type="submit">Entrar</button>
-</form>
+<div class="login-wrapper">
+
+  <!-- Lado Izquierdo -->
+  <div class="login-left">
+    <div class="logo-box">
+      <img src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F24%2FLEGO_logo.svg%2F512px-LEGO_logo.svg.png&imgrefurl=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FArchivo%3ALEGO_logo.svg&docid=DOdeOTJT18-2QM&tbnid=rroeklmHsQ9ZoM&vet=12ahUKEwiI74eF0cKQAxUMD0QIHWXANYcQM3oECBEQAA..i&w=512&h=512&hcb=2&ved=2ahUKEwiI74eF0cKQAxUMD0QIHWXANYcQM3oECBEQAA" alt="Logo" class="logo-image">
+    </div>
+  </div>
+
+  <!-- Lado Derecho -->
+  <div class="login-right">
+
+    <div class="role-selector">
+      <button class="role-btn active">
+        👤 Alumno
+      </button>
+      <button class="role-btn">
+        🛠️ Admin
+      </button>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <label class="input-label">Nombre de alumno</label>
+      <input type="text" class="input-field" formControlName="usuario" placeholder="Nombre completo...">
+
+      <label class="input-label">Contraseña</label>
+      <input type="password" class="input-field" formControlName="contrasena" placeholder="Password...">
+
+      <div class="buttons">
+        <button type="submit" class="btn-dark">ACCEDER</button>
+        <button type="button" class="btn-light" (click)="irACrearCuenta()">CREAR CUENTA</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

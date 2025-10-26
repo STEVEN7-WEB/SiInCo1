@@ -1,22 +1,99 @@
-form {
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  background: #222;
+  width: 100%; height: 675px;
+}
+
+/* Lado Izquierdo */
+.login-left {
+  width: 40%;
+  background-image: url("/src/Components/inicio-sesion/Imagenes/images.jpeg");
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-box {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+}
+
+.logo-box img {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+/* Lado Derecho */
+.login-right {
+  width: 60%;
+  background: #DFDFDF;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  margin: 20px auto;
+  justify-content: center;
+  padding: 50px;
 }
 
-label {
-  margin-top: 10px;
+.role-selector {
+  display: flex;
+  margin-bottom: 25px;
 }
 
-input {
-  padding: 5px;
-  font-size: 16px;
-}
-
-button {
-  margin-top: 15px;
-  padding: 10px;
-  font-size: 16px;
+.role-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  font-size: 18px;
+  background: #c4c4c4;
   cursor: pointer;
+}
+
+.role-btn.active {
+  background: #8e8e8e;
+  color: white;
+}
+
+/* Inputs */
+.input-label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+/* Botones */
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-dark,
+.btn-light {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-dark {
+  background: #181818;
+  color: white;
+}
+
+.btn-light {
+  background: white;
+  color: black;
+  border: 1px solid #181818;
 }
