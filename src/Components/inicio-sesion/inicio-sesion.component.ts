@@ -12,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class InicioSesionComponent implements OnInit {
   loginForm!: FormGroup;
+  selectedRole: 'usuario' | 'admin' = 'usuario';
 
-  constructor(private fb: FormBuilder, private router: Router) {}  // <-- aquí se agrega Router
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -23,14 +24,25 @@ export class InicioSesionComponent implements OnInit {
   }
 
   onSubmit(): void {
-    alert('Sesión iniciada ✅');
+    if (this.selectedRole === 'usuario') {
+      alert('Inicio de sesión Alumno ✅');
+    } else {
+      alert('Inicio de sesión Admin ✅');
+    }
   }
 
   irACrearCuenta() {
-    this.router.navigate(['/crear-cuenta']);  // ahora funciona
+    this.router.navigate(['/crear-cuenta']);
   }
 
-  seleccionarRol(rol: string): void {
+  olvideContrasena() {
+    alert('Redirigiendo a recuperación de contraseña...');
+    // Aquí puedes navegar a otra ruta o abrir un modal
+  }
+
+  seleccionarRol(rol: 'usuario' | 'admin'): void {
+    this.selectedRole = rol;
+    this.loginForm.reset();
     console.log('Modo:', rol);
   }
 }

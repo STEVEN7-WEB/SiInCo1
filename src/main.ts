@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
-      { path: '', component: InicioSesionComponent },
+      { path: 'inicio-sesion', component: InicioSesionComponent },
       { path: 'crear-cuenta', component: CrearCuentaComponent }
     ]),
     importProvidersFrom(ReactiveFormsModule)

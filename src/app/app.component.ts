@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { InicioSesionComponent } from '../Components/inicio-sesion/inicio-sesion.component';
+import { CrearCuentaComponent } from '../Components/crear-cuenta/crear-cuenta.component';
 
 @Component({
   selector: 'app-root',

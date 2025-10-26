@@ -1,0 +1,77 @@
+.register-wrapper {
+  display: flex;
+  width: 100%;
+  height: 675px;
+}
+
+/* Lado Izquierdo */
+.register-left {
+  width: 30%;
+  height: 97%;
+  background-image: url("./Imagenes/fondo.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+.logo-box img {
+  width: 120px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+/* Lado Derecho */
+.register-right {
+  width: 70%;
+  background: #070707;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  color: white;
+}
+
+.input-label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.input-field {
+  width: 97%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn-dark, .btn-light {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-dark {
+  background: #1dad00;
+  color: white;
+}
+
+.btn-light {
+  background: rgb(0, 4, 255);
+  color: white;
+}
