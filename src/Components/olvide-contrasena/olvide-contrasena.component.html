@@ -1,1 +1,17 @@
-<p>olvide-contrasena works!</p>
+<div class="forgot-wrapper">
+  <h2 class="title">Recuperar contraseña</h2>
+
+  <form [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
+
+    <label class="input-label">Número de control</label>
+    <input type="text" formControlName="numControl" class="input-field" placeholder="Ej. 123456">
+
+    <button class="btn-dark" type="submit">RECUPERAR</button>
+    <button class="btn-light" type="button" (click)="volverLogin()">VOLVER</button>
+
+  </form>
+
+  <div class="result" *ngIf="mensaje">
+    {{ mensaje }}
+  </div>
+</div>

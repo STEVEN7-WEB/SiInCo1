@@ -52,7 +52,7 @@ export class InicioSesionComponent implements OnInit {
   }
 
   olvideContrasena() {
-    alert('Redirigiendo a recuperación de contraseña...');
+    this.router.navigate(['/olvide-contrasena']);
   }
 
   seleccionarRol(rol: 'usuario' | 'admin'): void {

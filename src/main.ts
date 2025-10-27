@@ -5,13 +5,15 @@ import { InicioSesionComponent } from './Components/inicio-sesion/inicio-sesion.
 import { CrearCuentaComponent } from './Components/crear-cuenta/crear-cuenta.component';
 import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OlvideContrasenaComponent } from './Components/olvide-contrasena/olvide-contrasena.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
         { path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
       { path: 'inicio-sesion', component: InicioSesionComponent },
-      { path: 'crear-cuenta', component: CrearCuentaComponent }
+      { path: 'crear-cuenta', component: CrearCuentaComponent },
+      { path: 'olvide-contrasena', component: OlvideContrasenaComponent }
     ]),
     importProvidersFrom(ReactiveFormsModule)
   ]

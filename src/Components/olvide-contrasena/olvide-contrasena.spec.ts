@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { OlvideContrasena } from './olvide-contrasena';
+import { OlvideContrasenaComponent } from './olvide-contrasena.component';
 
 describe('OlvideContrasena', () => {
-  let component: OlvideContrasena;
-  let fixture: ComponentFixture<OlvideContrasena>;
+  let component: OlvideContrasenaComponent;
+  let fixture: ComponentFixture<OlvideContrasenaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OlvideContrasena]
+      imports: [OlvideContrasenaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OlvideContrasena);
+    fixture = TestBed.createComponent(OlvideContrasenaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

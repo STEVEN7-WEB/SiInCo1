@@ -1,0 +1,43 @@
+.forgot-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 120px;
+  background: #0a0a0a;
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+.btn-dark, .btn-light {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+}
+
+.btn-dark {
+  background: #008f11;
+  color: white;
+}
+
+.btn-light {
+  background: #0044ff;
+  color: white;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
+}
