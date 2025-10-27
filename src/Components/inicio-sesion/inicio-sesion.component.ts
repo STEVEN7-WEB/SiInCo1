@@ -25,9 +25,25 @@ export class InicioSesionComponent implements OnInit {
 
   onSubmit(): void {
     if (this.selectedRole === 'usuario') {
-      alert('Inicio de sesión Alumno ✅');
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const usuarioValido = usuarios.find(
+        (u: any) => u.numControl === this.loginForm.value.usuario && u.contrasena === this.loginForm.value.contrasena
+      );
+
+      if (usuarioValido) {
+        alert(`Bienvenido ${usuarioValido.nombre} ✅`);
+      } else {
+        alert('Usuario o contraseña incorrectos ❌');
+      }
+
     } else {
-      alert('Inicio de sesión Admin ✅');
+      // admin fijo
+      const adminUser = { usuario: 'admin', contrasena: '1234' };
+      if (this.loginForm.value.usuario === adminUser.usuario && this.loginForm.value.contrasena === adminUser.contrasena) {
+        alert('Bienvenido Admin ✅');
+      } else {
+        alert('Usuario o contraseña admin incorrectos ❌');
+      }
     }
   }
 
@@ -37,12 +53,10 @@ export class InicioSesionComponent implements OnInit {
 
   olvideContrasena() {
     alert('Redirigiendo a recuperación de contraseña...');
-    // Aquí puedes navegar a otra ruta o abrir un modal
   }
 
   seleccionarRol(rol: 'usuario' | 'admin'): void {
     this.selectedRole = rol;
     this.loginForm.reset();
-    console.log('Modo:', rol);
   }
 }

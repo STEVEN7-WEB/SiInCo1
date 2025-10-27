@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
+        { path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
       { path: 'inicio-sesion', component: InicioSesionComponent },
       { path: 'crear-cuenta', component: CrearCuentaComponent }
     ]),

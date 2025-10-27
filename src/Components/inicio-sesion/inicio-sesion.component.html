@@ -37,7 +37,6 @@
       <div class="buttons">
         <button type="submit" class="btn-dark">ACCEDER</button>
 
-        <!-- Botones condicionales según el rol -->
         <button *ngIf="selectedRole === 'usuario'" type="button" class="btn-light" (click)="irACrearCuenta()">CREAR CUENTA</button>
         <button *ngIf="selectedRole === 'usuario'" type="button" class="btn-red" (click)="olvideContrasena()">OLVIDÉ MI CONTRASEÑA</button>
       </div>
