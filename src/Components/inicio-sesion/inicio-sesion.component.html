@@ -1,13 +1,11 @@
 <div class="login-wrapper">
 
-  <!-- Lado Izquierdo -->
   <div class="login-left">
     <div class="logo-box">
       <img src="https://copilot.microsoft.com/th/id/BCO.e657d4e2-a373-4b52-bec3-5741c8275507.png" alt="Logo" class="logo-image">
     </div>
   </div>
 
-  <!-- Lado Derecho -->
   <div class="login-right">
 
     <div class="role-selector">
@@ -34,11 +32,19 @@
       <label class="input-label">Contraseña</label>
       <input type="password" class="input-field" formControlName="contrasena" placeholder="Password...">
 
+      <button *ngIf="selectedRole === 'usuario'" type="button" 
+              class="btn-link" 
+              (click)="olvideContrasena()">
+        OLVIDÉ MI CONTRASEÑA
+      </button>
+      
       <div class="buttons">
-        <button type="submit" class="btn-dark">ACCEDER</button>
-
-        <button *ngIf="selectedRole === 'usuario'" type="button" class="btn-light" (click)="irACrearCuenta()">CREAR CUENTA</button>
-        <button *ngIf="selectedRole === 'usuario'" type="button" class="btn-red" (click)="olvideContrasena()">OLVIDÉ MI CONTRASEÑA</button>
+        <button type="submit" class="btn btn-primary">ACCEDER</button>
+        <button *ngIf="selectedRole === 'usuario'" type="button" 
+                class="btn btn-secondary" 
+                (click)="irACrearCuenta()">
+          CREAR CUENTA
+        </button>
       </div>
 
     </form>

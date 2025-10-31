@@ -1,17 +1,46 @@
+<!-- 
+  USAMOS LA MISMA ESTRUCTURA QUE EL LOGIN
+  para mantener un diseño 100% consistente.
+-->
 <div class="forgot-wrapper">
-  <h2 class="title">Recuperar contraseña</h2>
 
-  <form [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
-
-    <label class="input-label">Número de control</label>
-    <input type="text" formControlName="numControl" class="input-field" placeholder="Ej. 123456">
-
-    <button class="btn-dark" type="submit">RECUPERAR</button>
-    <button class="btn-light" type="button" (click)="volverLogin()">VOLVER</button>
-
-  </form>
-
-  <div class="result" *ngIf="mensaje">
-    {{ mensaje }}
+  <!-- Lado Izquierdo (30%) -->
+  <div class="forgot-left">
+    <div class="logo-box">
+      <img src="https.../logo.png" alt="Logo" class="logo-image">
+    </div>
   </div>
-</div>
+
+  <!-- Lado Derecho (70%) -->
+  <div class="forgot-right">
+
+    <h2 class="title">Recuperar Contraseña</h2>
+
+    <form [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
+
+      <label class="input-label">Número de control</label>
+      <input type="text" formControlName="numControl" class="input-field" placeholder="Ej. 123456">
+
+      <label class="input-label">Número de celular</label>
+      <input type="text" formControlName="celular" class="input-field" placeholder="Tu número de celular registrado">
+
+      <!-- CAMPO MODIFICADO: Solo se pide la respuesta -->
+      <label class="input-label">Respuesta de seguridad</label>
+      <input type="text" formControlName="respuestaSeguridad" class="input-field" placeholder="Escribe tu respuesta secreta...">
+
+      <!-- BOTONES ACTUALIZADOS -->
+      <div class="buttons">
+        <button type="submit" class="btn btn-primary">RECUPERAR</button>
+        <button type="button" class="btn btn-secondary" (click)="volverLogin()">VOLVER</button>
+      </div>
+
+    </form>
+
+    <!-- MENSAJE DE RESULTADO -->
+    <div class="result" *ngIf="mensaje">
+      {{ mensaje }}
+    </div>
+  </div> <!-- Fin de .forgot-right -->
+
+</div> <!-- Fin de .forgot-wrapper -->
+

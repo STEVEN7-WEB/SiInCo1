@@ -1,43 +1,171 @@
+/* --- CONFIGURACIÓN GLOBAL --- */
+* {
+  box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
 .forgot-wrapper {
+  display: flex;
   width: 100%;
-  max-width: 400px;
-  margin: auto;
-  margin-top: 120px;
-  background: #0a0a0a;
-  padding: 30px;
-  border-radius: 10px;
-  color: white;
+  min-height: 97.5vh; /* Consistente con el login */
+}
+
+/* --- LADO IZQUIERDO (IMAGEN Y LOGO) --- */
+.forgot-left {
+  width: 30%;
+  background-image: url("./Imagenes/fondo.jpg"); /* Asegúrate que esta ruta sea correcta */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.logo-box img {
+  width: 150px;
+  border-radius: 50%; /* 50% para un círculo perfecto */
+  margin-bottom: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil al logo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- LADO DERECHO (FORMULARIO) --- */
+.forgot-right {
+  width: 70%;
+  background: #121212; /* Mismo fondo oscuro */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  color: white; /* Color de texto por defecto */
+  
+  /* Centra horizontalmente el contenido (título y form) */
+  align-items: center; 
+}
+
+/* Título */
+.title {
+  width: 80%; /* Mismo ancho que el form */
+  max-width: 500px; /* Ancho máximo */
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #fff;
+}
+
+/* Formulario */
+.forgot-right form {
+  width: 80%; /* Ancho de 80% para consistencia */
+  max-width: 500px; /* Ancho máximo */
+}
+
+/* --- FORMULARIO (ETIQUETAS E INPUTS) --- */
+.input-label {
+  display: block;
+  margin-bottom: 8px; /* Espacio entre etiqueta e input */
+  margin-top: 15px; /* Espacio entre campos */
+  font-weight: bold;
+  color: #eee;
+  font-size: 14px;
+}
+/* Quitar el margen superior del primer label */
+.input-label:first-of-type {
+  margin-top: 0;
 }
 
 .input-field {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 18px;
+  width: 100%; /* Ocupa todo el ancho (del form) */
+  padding: 15px;
+  border: 1px solid #444; /* Borde sutil */
   border-radius: 6px;
-  border: 1px solid #444;
+  background: #2a2a2a; /* Estilo dark-mode */
+  color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  /* Apariencia estándar para que el <select> se vea igual */
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.btn-dark, .btn-light {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  cursor: pointer;
+/* Este CSS se aplica al <select> si existe, 
+  pero no daña a los <input>
+*/
+select.input-field {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23AAA%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.6-3.6%205.4-7.9%205.4-12.9%200-5-1.8-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: .65em auto;
+}
+
+/* Estilo para las opciones del dropdown */
+select.input-field option {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+
+.input-field::placeholder {
+  color: #777;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #007bff; /* Acento azul al hacer foco */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* --- JERARQUÍA DE BOTONES --- */
+
+/* Base común */
+.btn {
+  flex: 1;
+  padding: 15px;
+  font-size: 16px;
   border-radius: 8px;
+  cursor: pointer;
   border: none;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
-.btn-dark {
-  background: #008f11;
+/* Botón Primario (Recuperar) */
+.btn-primary {
+  background: #007bff;
   color: white;
 }
-
-.btn-light {
-  background: #0044ff;
-  color: white;
+.btn-primary:hover {
+  background: #0056b3;
 }
 
+/* Botón Secundario (Volver) */
+.btn-secondary {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+.btn-secondary:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+/* Contenedor de botones */
+.buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-top: 30px; /* Más espacio sobre los botones */
+}
+
+/* --- MENSAJE DE RESULTADO --- */
 .result {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
+  color: #eee;
+  width: 100%;
 }
+

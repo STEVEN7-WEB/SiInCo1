@@ -1,42 +1,88 @@
 <div class="register-wrapper">
 
-  <!-- Lado Izquierdo -->
+  <!-- Lado Izquierdo (30%) -->
   <div class="register-left">
     <div class="logo-box">
-      <img src="https://copilot.microsoft.com/th/id/BCO.e657d4e2-a373-4b52-bec3-5741c8275507.png" alt="Logo" class="logo-image">
+      <img src="https.../logo.png" alt="Logo" class="logo-image">
     </div>
   </div>
 
-  <!-- Lado Derecho -->
+  <!-- Lado Derecho (70%) -->
   <div class="register-right">
+
     <h2 class="title">Crear Cuenta</h2>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-      <label class="input-label">Nombre completo</label>
-      <input type="text" class="input-field" formControlName="nombre" placeholder="Tu nombre completo...">
+      <!-- Fila 1 de formulario -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="input-label">Nombre completo</label>
+          <input type="text" class="input-field" formControlName="nombre" placeholder="Tu nombre completo...">
+        </div>
+        <div class="form-group">
+          <label class="input-label">Número de control</label>
+          <input type="text" class="input-field" formControlName="numControl" placeholder="Ej. 123456">
+        </div>
+      </div>
 
-      <label class="input-label">Número de control</label>
-      <input type="text" class="input-field" formControlName="numControl" placeholder="Ej. 123456">
+      <!-- Fila 2 de formulario -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="input-label">Carrera</label>
+          <select class="input-field" formControlName="carrera">
+            <option value="" disabled>Selecciona tu carrera...</option>
+            <option value="sistemas">Ingeniería en Sistemas</option>
+            <option value="industrial">Ingeniería Industrial</option>
+            <option value="gestion">Ingeniería en Gestión</option>
+            <option value="agronomia">Ingeniería en Agronomia</option>
+            <option value="alimentarias">Ingeniería Alimentarias</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="input-label">Número de celular</label>
+          <input type="text" class="input-field" formControlName="celular" placeholder="Ej. 55 1234 5678">
+        </div>
+      </div>
+      
+      <!-- *** NUEVA FILA AÑADIDA *** -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="input-label">Pregunta de seguridad</label>
+          <select class="input-field" formControlName="preguntaSeguridad">
+            <option value="" disabled>Selecciona una pregunta...</option>
+            <option value="mascota">Nombre de tu primera mascota</option>
+            <option value="madre">Segundo nombre de tu madre</option>
+            <option value="comida">Comida favorita de tu infancia</option>
+            <option value="ciudad">Ciudad donde naciste</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="input-label">Respuesta de seguridad</label>
+          <input type="text" class="input-field" formControlName="respuestaSeguridad" placeholder="Tu respuesta secreta...">
+        </div>
+      </div>
+      <!-- *** FIN DE LA NUEVA FILA *** -->
 
-      <label class="input-label">Carrera</label>
-      <input type="text" class="input-field" formControlName="carrera" placeholder="Tu carrera...">
-
-      <label class="input-label">Número de celular</label>
-      <input type="text" class="input-field" formControlName="celular" placeholder="Ej. 55 1234 5678">
-
-      <label class="input-label">Contraseña</label>
-      <input type="password" class="input-field" formControlName="contrasena" placeholder="Escribe tu contraseña">
-
-      <label class="input-label">Confirmar contraseña</label>
-      <input type="password" class="input-field" formControlName="confirmContrasena" placeholder="Repite tu contraseña">
+      <!-- Fila 4 de formulario (Contraseñas) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="input-label">Contraseña</label>
+          <input type="password" class="input-field" formControlName="contrasena" placeholder="Escribe tu contraseña">
+        </div>
+        <div class="form-group">
+          <label class="input-label">Confirmar contraseña</label>
+          <input type="password" class="input-field" formControlName="confirmContrasena" placeholder="Repite tu contraseña">
+        </div>
+      </div>
 
       <div class="buttons">
-        <button type="submit" class="btn-dark">CREAR CUENTA</button>
-        <button type="button" class="btn-light" (click)="volverLogin()">VOLVER</button>
+        <button type="submit" class="btn btn-primary">CREAR CUENTA</button>
+        <button type="button" class="btn btn-secondary" (click)="volverLogin()">VOLVER</button>
       </div>
 
     </form>
-  </div>
+  </div> <!-- Fin de .register-right -->
 
-</div>
+</div> <!-- Fin de .register-wrapper -->
+

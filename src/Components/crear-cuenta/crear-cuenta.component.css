@@ -1,14 +1,19 @@
+/* --- CONFIGURACIÓN GLOBAL --- */
+* {
+  box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
 .register-wrapper {
   display: flex;
   width: 100%;
-  height: 675px;
+  min-height: 97.5vh; /* Consistente con el login */
 }
 
-/* Lado Izquierdo */
+/* --- LADO IZQUIERDO (IMAGEN Y LOGO) --- */
 .register-left {
   width: 30%;
-  height: 97%;
-  background-image: url("./Imagenes/fondo.jpg");
+  background-image: url("./Imagenes/fondo.jpg"); /* Asegúrate que esta ruta sea correcta */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -16,62 +21,153 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .logo-box img {
-  width: 120px;
-  border-radius: 100px;
+  width: 150px;
+  border-radius: 50%; /* 50% para un círculo perfecto */
   margin-bottom: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil al logo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Lado Derecho */
+/* --- LADO DERECHO (FORMULARIO) --- */
 .register-right {
   width: 70%;
-  background: #070707;
+  background: #121212; /* Mismo fondo oscuro */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px;
-  color: white;
+  padding: 60px;
+  color: white; /* Color de texto por defecto */
+  
+  /* CAMBIO: Centra horizontalmente el contenido (título y form) */
+  align-items: center; 
 }
 
+/* Título */
+.title {
+  width: 80%; /* Mismo ancho que el form */
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #fff;
+}
+
+/* Formulario */
+.register-right form {
+  width: 80%; /* Ancho de 80% para consistencia */
+  max-height: 70vh; /* Altura máxima */
+  overflow-y: auto; /* Scroll si el formulario es muy largo */
+  padding-right: 10px; /* Espacio para la barra de scroll */
+}
+
+/* --- NUEVAS REGLAS: Estructura de 2 columnas --- */
+.form-row {
+  display: flex;
+  gap: 20px; /* Espacio entre las columnas */
+  margin-bottom: 20px; /* Espacio vertical entre filas */
+}
+
+.form-group {
+  flex: 1; /* Cada grupo de input/label ocupa 50% */
+}
+
+/* Responsive: En pantallas pequeñas, pasa a 1 columna */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .form-group {
+    margin-bottom: 20px; /* Recupera el margen vertical en móvil */
+  }
+}
+
+/* --- FORMULARIO (ETIQUETAS E INPUTS) --- */
 .input-label {
-  margin-top: 10px;
-  margin-bottom: 5px;
+  display: block;
+  margin-bottom: 8px; /* Espacio entre etiqueta e input */
   font-weight: bold;
-  font-size: 16px;
+  color: #eee;
+  font-size: 14px;
 }
 
 .input-field {
-  width: 97%;
-  padding: 12px;
-  margin-bottom: 18px;
-  border: 1px solid #aaa;
+  width: 100%; /* Ocupa todo el ancho (del .form-group) */
+  padding: 15px;
+  /* CAMBIO: margin-bottom se maneja ahora por .form-row o .form-group */
+  /* margin-bottom: 20px; (Eliminado) */
+  border: 1px solid #444; /* Borde sutil */
   border-radius: 6px;
+  background: #2a2a2a; /* Estilo dark-mode */
+  color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
+/* Asegura que el <select> también tenga texto blanco */
+select.input-field {
+  color: #fff;
+}
+/* Estilo para las opciones del dropdown */
+select.input-field option {
+  background: #2a2a2a;
+  color: #fff;
 }
 
-.btn-dark, .btn-light {
+
+.input-field::placeholder {
+  color: #777;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #007bff; /* Acento azul al hacer foco */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* --- JERARQUÍA DE BOTONES --- */
+
+/* Base común */
+.btn {
   flex: 1;
-  padding: 12px;
+  padding: 15px;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
-.btn-dark {
-  background: #1dad00;
+/* Botón Primario (Crear Cuenta) */
+.btn-primary {
+  background: #007bff;
   color: white;
+}
+.btn-primary:hover {
+  background: #0056b3;
 }
 
-.btn-light {
-  background: rgb(0, 4, 255);
-  color: white;
+/* Botón Secundario (Volver) */
+.btn-secondary {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
 }
+.btn-secondary:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+/* Contenedor de botones */
+.buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
