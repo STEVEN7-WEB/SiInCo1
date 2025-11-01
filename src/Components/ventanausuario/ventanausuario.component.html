@@ -1,6 +1,5 @@
 <div class="user-wrapper">
 
-  <!-- LADO IZQUIERDO -->
   <div class="user-left">
     <div class="logo-box">
       <img 
@@ -10,26 +9,31 @@
     </div>
 
     <nav class="menu-grid">
-      <a routerLink="/crear-solicitud" routerLinkActive="active" class="menu-item">
+      <button class="menu-item" (click)="navegar('crear-solicitud')">
         <span>➕</span>
         <p>Crear</p>
-      </a>
-      <a routerLink="/mis-solicitudes" routerLinkActive="active" class="menu-item">
+      </button>
+
+      <button class="menu-item" (click)="navegar('mis-solicitudes')">
         <span>📄</span>
         <p>Solicitudes</p>
-      </a>
-      <a routerLink="/mi-perfil" routerLinkActive="active" class="menu-item">
+      </button>
+
+      <button class="menu-item" (click)="navegar('mi-perfil')">
         <span>👤</span>
         <p>Perfil</p>
-      </a>
-      <a routerLink="/configuracion" routerLinkActive="active" class="menu-item">
+      </button>
+
+      <button class="menu-item" (click)="navegar('configuracion')">
         <span>⚙️</span>
         <p>Config</p>
-      </a>
-      <a routerLink="/ayuda" routerLinkActive="active" class="menu-item">
+      </button>
+
+      <button class="menu-item" (click)="navegar('ayuda')">
         <span>❓</span>
         <p>Ayuda</p>
-      </a>
+      </button>
+
       <button class="menu-item logout-btn" (click)="cerrarSesion()">
         <span>🚪</span>
         <p>Salir</p>
@@ -37,11 +41,8 @@
     </nav>
   </div>
 
-  <!-- LADO DERECHO -->
   <div class="user-right">
     <div class="content-box">
-      <h1>Bienvenido usuario</h1>
-      <p>Este apartado sirve para que realices tus solicitudes, veas el estatus y estés al pendiente de tu perfil.</p>
       <router-outlet></router-outlet>
     </div>
   </div>

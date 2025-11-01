@@ -32,7 +32,7 @@ export class InicioSesionComponent implements OnInit {
 
       if (usuarioValido) {
         alert(`Bienvenido ${usuarioValido.nombre} ✅`);
-                this.router.navigate(['/ventanausuario']);
+                this.router.navigate(['/usuario']);
       } else {
         alert('Usuario o contraseña incorrectos ❌');
       }
