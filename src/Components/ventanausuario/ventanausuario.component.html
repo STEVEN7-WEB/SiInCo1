@@ -1,0 +1,49 @@
+<div class="user-wrapper">
+
+  <!-- LADO IZQUIERDO -->
+  <div class="user-left">
+    <div class="logo-box">
+      <img 
+        src="https://copilot.microsoft.com/th/id/BCO.e657d4e2-a373-4b52-bec3-5741c8275507.png" 
+        alt="Logo SiInCo" 
+        class="logo-image">
+    </div>
+
+    <nav class="menu-grid">
+      <a routerLink="/crear-solicitud" routerLinkActive="active" class="menu-item">
+        <span>➕</span>
+        <p>Crear</p>
+      </a>
+      <a routerLink="/mis-solicitudes" routerLinkActive="active" class="menu-item">
+        <span>📄</span>
+        <p>Solicitudes</p>
+      </a>
+      <a routerLink="/mi-perfil" routerLinkActive="active" class="menu-item">
+        <span>👤</span>
+        <p>Perfil</p>
+      </a>
+      <a routerLink="/configuracion" routerLinkActive="active" class="menu-item">
+        <span>⚙️</span>
+        <p>Config</p>
+      </a>
+      <a routerLink="/ayuda" routerLinkActive="active" class="menu-item">
+        <span>❓</span>
+        <p>Ayuda</p>
+      </a>
+      <button class="menu-item logout-btn" (click)="cerrarSesion()">
+        <span>🚪</span>
+        <p>Salir</p>
+      </button>
+    </nav>
+  </div>
+
+  <!-- LADO DERECHO -->
+  <div class="user-right">
+    <div class="content-box">
+      <h1>Bienvenido usuario</h1>
+      <p>Este apartado sirve para que realices tus solicitudes, veas el estatus y estés al pendiente de tu perfil.</p>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>
