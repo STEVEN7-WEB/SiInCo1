@@ -1,0 +1,36 @@
+<div class="forgot-wrapper">
+
+  <div class="forgot-left">
+    <div class="logo-box">
+      <img src="https.../logo.png" alt="Logo" class="logo-image">
+    </div>
+  </div>
+
+  <div class="forgot-right">
+
+    <h2 class="title">Recuperar Contraseña</h2>
+
+    <form [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
+
+      <label class="input-label">Número de control</label>
+      <input type="text" formControlName="numControl" class="input-field" placeholder="Ej. 123456">
+
+      <label class="input-label">Número de celular</label>
+      <input type="text" formControlName="celular" class="input-field" placeholder="Tu número de celular registrado">
+
+      <label class="input-label">Respuesta de seguridad</label>
+      <input type="text" formControlName="respuestaSeguridad" class="input-field" placeholder="Escribe tu respuesta secreta...">
+
+      <div class="buttons">
+        <button type="submit" class="btn btn-primary">RECUPERAR</button>
+        <button type="button" class="btn btn-secondary" (click)="volverLogin()">VOLVER</button>
+      </div>
+
+    </form>
+
+    <div class="result" *ngIf="mensaje">
+      {{ mensaje }}
+    </div>
+  </div>
+</div>
+

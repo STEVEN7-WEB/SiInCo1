@@ -1,0 +1,14 @@
+<h2 class="title">Perfil del Usuario</h2>
+
+<div class="perfil-datos">
+  <p><strong>Nombre completo:</strong> {{ usuario.nombre }}</p>
+  <p><strong>Número de control:</strong> {{ usuario.numControl }}</p>
+  <p><strong>Carrera:</strong> {{ usuario.carrera }}</p>
+  <p><strong>Celular:</strong> {{ usuario.celular }}</p>
+  <p><strong>Pregunta de seguridad:</strong> {{ usuario.preguntaSeguridad }}</p>
+  <p><strong>Respuesta de seguridad:</strong> {{ usuario.respuestaSeguridad }}</p>
+</div>
+
+<div class="buttons">
+  <button class="btn btn-primary" (click)="irAActualizar()">ACTUALIZAR DATOS</button>
+</div>
