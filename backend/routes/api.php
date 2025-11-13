@@ -22,6 +22,5 @@ use App\Http\Controllers\UsuarioController;
 Route::post('/registrar', [UsuarioController::class, 'registrar']);
 Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
 
-use App\Http\Controllers\SolicitudController;
-Route::post('/solicitudes', [SolicitudController::class, 'store']);
-
+Route::post('/solicitudes', [SolicitudController::class, 'store']); // Crear solicitud
+Route::get('/solicitudes', [SolicitudController::class, 'index']);  // Listar solicitudes

@@ -1,17 +1,15 @@
 <div class="contenedor-formulario">
   <h2>Consulta de Solicitudes de Mantenimiento</h2>
-  <p class="aviso-obligatorio">Visualiza las solicitudes registradas por los usuarios.</p>
-
   <div class="tabla-contenedor">
-    <table class="tabla-solicitudes">
+    <table>
       <thead>
         <tr>
-          <th>N° Solicitud</th>
+          <th>N°</th>
           <th>Fecha</th>
           <th>Marca</th>
           <th>Color</th>
           <th>Sistema Operativo</th>
-          <th>Título del Problema</th>
+          <th>Título</th>
           <th>Estatus</th>
         </tr>
       </thead>
@@ -23,15 +21,7 @@
           <td>{{ solicitud.color }}</td>
           <td>{{ solicitud.so }}</td>
           <td>{{ solicitud.titulo }}</td>
-          <td>
-            <span class="estatus" [ngClass]="{
-              'pendiente': solicitud.estatus === 'Pendiente',
-              'en-proceso': solicitud.estatus === 'En proceso',
-              'completado': solicitud.estatus === 'Completado'
-            }">
-              {{ solicitud.estatus }}
-            </span>
-          </td>
+          <td>{{ solicitud.estatus }}</td>
         </tr>
       </tbody>
     </table>

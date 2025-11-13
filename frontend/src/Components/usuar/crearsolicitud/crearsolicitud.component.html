@@ -1,91 +1,74 @@
-<div class="contenedor-formulario" [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
+<div class="contenedor-formulario">
   <h2>Registrar Solicitud de Mantenimiento</h2>
-  <p class="aviso-obligatorio">Los campos marcados con <span class="obligatorio">*</span> son obligatorios.</p>
+  <form [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
 
-  <div class="fila fila-de-tres">
-    <div class="campo">
-      <label for="marca">Marca del equipo: <span class="obligatorio">*</span></label>
-      <select id="marca" formControlName="marca" required>
-        <option value="" disabled selected>Selecciona una marca...</option>
-        <option value="Asus">Asus</option>
-        <option value="Lenovo">Lenovo</option>
-        <option value="HP">HP</option>
-        <option value="Dell">Dell</option>
-      </select>
-    </div>
-    <div class="campo">
-      <label for="color">Color: <span class="obligatorio">*</span></label>
-      <select id="color" formControlName="color" required>
-        <option value="" disabled selected>Selecciona un color...</option>
-        <option value="Gris">Gris</option>
-        <option value="Negro">Negro</option>
-        <option value="Blanco">Blanco</option>
-        <option value="Rojo">Rojo</option>
-        <option value="Azul">Azul</option>
-      </select>
-    </div>
-    <div class="campo">
-      <label for="so">Sistema Operativo: <span class="obligatorio">*</span></label>
-      <select id="so" formControlName="sistemaOperativo" required>
-        <option value="" disabled selected>Selecciona un SO...</option>
-        <option value="Windows 11">Windows 11</option>
-        <option value="Windows 10">Windows 10</option>
-        <option value="macOS">macOS</option>
-        <option value="Linux">Linux</option>
-        <option value="Otro">Otro</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="fila">
-    <div class="campo">
-      <label for="titulo">Título breve del problema:</label>
-      <input type="text" id="titulo" formControlName="titulo" />
-    </div>
-    <div class="campo">
-      <label for="error">Mensaje de error (si aparece):</label>
-      <input type="text" id="error" formControlName="mensajeError" />
-    </div>
-  </div>
-
-  <div class="fila">
-    <div class="campo">
-      <label for="descripcion">Descripción detallada:</label>
-      <textarea id="descripcion" formControlName="descripcion"></textarea>
-    </div>
-    <div class="campo">
-      <label for="programa">Programa a instalar (opcional):</label>
-      <input type="text" id="programa" formControlName="nombrePrograma" placeholder="Especifique el programa..." />
-    </div>
-  </div>
-
-  <div class="fila">
-    <div class="grupo-checkbox ancho-total">
-      <div class="campo-checkbox">
-        <input type="checkbox" id="check-ram" formControlName="instalaRam" />
-        <label for="check-ram">Instalación de RAM</label>
+    <div class="fila fila-de-tres">
+      <div class="campo">
+        <label>Marca del equipo *</label>
+        <select formControlName="marca">
+          <option value="" disabled selected>Selecciona una marca...</option>
+          <option value="Asus">Asus</option>
+          <option value="Lenovo">Lenovo</option>
+          <option value="HP">HP</option>
+          <option value="Dell">Dell</option>
+        </select>
       </div>
-      <div class="campo-checkbox">
-        <input type="checkbox" id="check-ssd" formControlName="instalaSsd" />
-        <label for="check-ssd">Instalación de SSD</label>
+      <div class="campo">
+        <label>Color *</label>
+        <select formControlName="color">
+          <option value="" disabled selected>Selecciona un color...</option>
+          <option value="Gris">Gris</option>
+          <option value="Negro">Negro</option>
+          <option value="Blanco">Blanco</option>
+          <option value="Rojo">Rojo</option>
+          <option value="Azul">Azul</option>
+        </select>
       </div>
-      <div class="campo-checkbox">
-        <input type="checkbox" id="check-preventivo" formControlName="mantenimiento" />
-        <label for="check-preventivo">Mantenimiento preventivo</label>
+      <div class="campo">
+        <label>Sistema Operativo *</label>
+        <select formControlName="sistemaOperativo">
+          <option value="" disabled selected>Selecciona un SO...</option>
+          <option value="Windows 11">Windows 11</option>
+          <option value="Windows 10">Windows 10</option>
+          <option value="macOS">macOS</option>
+          <option value="Linux">Linux</option>
+          <option value="Otro">Otro</option>
+        </select>
       </div>
     </div>
-  </div>
 
-  <div class="fila">
-    <div class="campo-contrato ancho-total">
-      <input type="checkbox" id="check-contrato" formControlName="aceptaConfirmacion" required />
-      <label for="check-contrato">
-        He leído y acepto los
-        <a href="archivo.txt" target="_blank" rel="noopener noreferrer">Términos y Condiciones del Servicio</a>
-        <span class="obligatorio">*</span>
+    <div class="fila">
+      <div class="campo">
+        <label>Título breve del problema *</label>
+        <input type="text" formControlName="titulo">
+      </div>
+      <div class="campo">
+        <label>Mensaje de error (opcional)</label>
+        <input type="text" formControlName="mensajeError">
+      </div>
+    </div>
+
+    <div class="fila">
+      <div class="campo">
+        <label>Descripción detallada *</label>
+        <textarea formControlName="descripcion"></textarea>
+      </div>
+      <div class="campo">
+        <label>Programa a instalar (opcional)</label>
+        <input type="text" formControlName="nombrePrograma" [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
+        <label>
+          <input type="checkbox" formControlName="instalaPrograma"> Instalar programa
+        </label>
+      </div>
+    </div>
+
+    <div class="fila">
+      <label>
+        <input type="checkbox" formControlName="aceptaConfirmacion"> Acepto los términos *
       </label>
     </div>
-  </div>
 
-  <button type="submit">Enviar Solicitud</button>
+    <button type="submit">Enviar Solicitud</button>
+
+  </form>
 </div>

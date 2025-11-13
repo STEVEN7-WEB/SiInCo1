@@ -10,15 +10,8 @@ class Solicitud extends Model
     use HasFactory;
 
     protected $fillable = [
-        'marca',
-        'color',
-        'sistemaOperativo',
-        'titulo',
-        'descripcion',
-        'mensajeError',
-        'instalaRam',
-        'instalaSsd',
-        'mantenimiento',
-        'nombrePrograma'
+        'marca', 'color', 'sistemaOperativo', 'titulo', 'descripcion', 
+        'mensajeError', 'instalaRam', 'instalaSsd', 'mantenimiento',
+        'instalaPrograma', 'nombrePrograma', 'aceptaConfirmacion'
     ];
 }

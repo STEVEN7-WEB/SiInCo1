@@ -1,41 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-versolicitud',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './versolicitud.component.html',
   styleUrls: ['./versolicitud.component.css']
 })
-export class VersolicitudComponent {
-  solicitudes = [
-    {
-      numero: 1,
-      fecha: '2025-11-08',
-      marca: 'Lenovo',
-      color: 'Negro',
-      so: 'Windows 11',
-      titulo: 'Pantalla azul al iniciar',
-      estatus: 'Pendiente'
-    },
-    {
-      numero: 2,
-      fecha: '2025-11-07',
-      marca: 'HP',
-      color: 'Gris',
-      so: 'Windows 10',
-      titulo: 'No reconoce el SSD',
-      estatus: 'En proceso'
-    },
-    {
-      numero: 3,
-      fecha: '2025-11-05',
-      marca: 'Asus',
-      color: 'Blanco',
-      so: 'Linux',
-      titulo: 'Instalación de programa',
-      estatus: 'Completado'
-    }
-  ];
+export class VersolicitudComponent implements OnInit {
+  solicitudes: any[] = [];
+  apiUrl = 'http://127.0.0.1:8000/api/solicitudes';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get(this.apiUrl).subscribe({
+      next: (res: any) => {
+        this.solicitudes = res.map((s: any, i: number) => ({
+          numero: i + 1,
+          fecha: s.created_at,
+          marca: s.marca,
+          color: s.color,
+          so: s.sistemaOperativo,
+          titulo: s.titulo,
+          estatus: 'Pendiente' // Puedes agregar columna estatus en la tabla si quieres
+        }));
+      },
+      error: (err) => console.error('Error al cargar solicitudes:', err)
+    });
+  }
 }
