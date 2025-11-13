@@ -35,5 +35,25 @@ class UsuarioController extends Controller
         'usuario' => $user
     ], 201);
 }
+public function login(Request $request)
+{
+    $request->validate([
+        'usuario' => 'required|string',
+        'password' => 'required|string',
+    ]);
 
+    // Buscar por numControl
+    $user = User::where('numControl', $request->usuario)->first();
+
+    if (!$user || !password_verify($request->password, $user->password)) {
+        return response()->json([
+            'message' => 'Credenciales incorrectas ❌'
+        ], 401);
+    }
+
+    return response()->json([
+        'message' => 'Inicio de sesión exitoso ✅',
+        'usuario' => $user
+    ], 200);
+}
 }

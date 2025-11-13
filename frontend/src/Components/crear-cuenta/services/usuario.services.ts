@@ -23,6 +23,10 @@ export class UsuarioService {
     return this.http.post(`${this.apiUrl}/registrar`, datos);
   }
 
+  login(data: any): Observable<any> {
+  return this.http.post('http://127.0.0.1:8000/api/login', data);
+}
+
   // Aquí puedes añadir más métodos (login, etc.)
   
 }

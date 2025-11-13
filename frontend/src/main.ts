@@ -3,76 +3,51 @@ import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 // --- Componentes Principales (Login, Registro, etc.) ---
 import { InicioSesionComponent } from './Components/inicio-sesion/inicio-sesion.component';
 import { CrearCuentaComponent } from './Components/crear-cuenta/crear-cuenta.component';
 import { OlvideContrasenaComponent } from './Components/olvide-contrasena/olvide-contrasena.component';
 
-// --- Componente Layout (Padre) ---
+// --- Componentes Layout (Padres) ---
 import { VentanaUsuarioComponent } from './Components/ventanausuario/ventanausuario.component';
 import { VentanaadminComponent } from './Components/ventanaadmin/ventanaadmin.component';
 
-// --- Componentes Hijos (Se mostrarán dentro de VentanaUsuario) ---
+// --- Componentes Hijos ---
 import { CrearSolicitudComponent } from './Components/usuar/crearsolicitud/crearsolicitud.component';
-// (Necesitarás crear este componente que te mencioné en el paso anterior)
-import { BienvenidaComponent } from './Components/usuar/bienvenida/bienvenida.component'; 
+import { BienvenidaComponent } from './Components/usuar/bienvenida/bienvenida.component';
 import { Versolicitud } from './Components/usuar/versolicitud/versolicitud';
-
-// (Aquí importarías MisSolicitudesComponent, PerfilComponent, etc. cuando los tengas)
-// import { MisSolicitudesComponent } from './Components/usuario/missolicitudes/missolicitudes.component';
-
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
-      // --- Rutas Principales (fuera del layout de usuario) ---
+      // --- Rutas principales ---
       { path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
       { path: 'inicio-sesion', component: InicioSesionComponent },
       { path: 'crear-cuenta', component: CrearCuentaComponent },
       { path: 'olvide-contrasena', component: OlvideContrasenaComponent },
-      {path: 'admin', component: VentanaadminComponent},
+      { path: 'admin', component: VentanaadminComponent },
 
-      // --- RUTA PADRE (El Layout de Usuario) ---
+      // --- RUTA PADRE (Usuario) ---
       {
-        // 1. CAMBIO: Renombramos 'ventanausuario' a 'usuario' (es más corto y semántico)
-        path: 'admin', 
-        component: VentanaadminComponent,
-      },
-      {
-        path: 'usuar', 
+        path: 'usuar',
         component: VentanaUsuarioComponent,
-
-        // 2. CAMBIO: Añadimos 'children' (rutas hijas)
-        // Estas rutas se cargarán en el <router-outlet> de VentanaUsuarioComponent
         children: [
-          { 
-            path: '', // Si solo van a /usuario
-            redirectTo: 'bienvenida', // Redirige a la bienvenida
-            pathMatch: 'full' 
-          },
-          { 
-            path: 'bienvenida', // Ruta: /usuario/bienvenida
-            component: BienvenidaComponent 
-          },
-          { 
-            path: 'crear-solicitud', // Ruta: /usuario/crear-solicitud
-            component: CrearSolicitudComponent 
-          },
-          {
-            path: 'mis-solicitudes',
-            component: Versolicitud
-          },
-          // (Aquí pondrías las otras rutas: mis-solicitudes, mi-perfil, etc.)
-          // { path: 'mis-solicitudes', component: MisSolicitudesComponent },
+          { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+          { path: 'bienvenida', component: BienvenidaComponent },
+          { path: 'crear-solicitud', component: CrearSolicitudComponent },
+          { path: 'mis-solicitudes', component: Versolicitud },
         ]
       },
-
-      // 3. CAMBIO: Eliminamos las rutas "planas" que ahora son "hijas"
-      // { path: 'ventanausuario', component: VentanaUsuarioComponent }, // <- Eliminada (ahora es 'usuario' y es padre)
-      // { path: 'crear-solicitud', component: CrearSolicitudComponent } // <- Eliminada (ahora es hija de 'usuario')
     ]),
-    
-    importProvidersFrom(ReactiveFormsModule)
-  ]
-});
+
+    // ✅ Módulos esenciales para formularios y peticiones HTTP
+    importProvidersFrom(
+      CommonModule,
+      ReactiveFormsModule,
+      HttpClientModule
+    ),
+  ],
+}).catch(err => console.error(err));
