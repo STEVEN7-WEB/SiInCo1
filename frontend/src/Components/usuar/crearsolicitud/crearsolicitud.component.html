@@ -1,95 +1,91 @@
-<div class="contenedor-formulario">
-    
+<div class="contenedor-formulario" [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
   <h2>Registrar Solicitud de Mantenimiento</h2>
   <p class="aviso-obligatorio">Los campos marcados con <span class="obligatorio">*</span> son obligatorios.</p>
 
   <div class="fila fila-de-tres">
-      <div class="campo">
-          <label for="marca">Marca del equipo: <span class="obligatorio">*</span></label>
-          <select id="marca" name="marca" required> 
-              <option value="" disabled selected>Selecciona una marca...</option>
-              <option value="Asus">Asus</option>
-              <option value="Lenovo">Lenovo</option>
-              <option value="HP">HP</option>
-              <option value="Dell">Dell</option>
-          </select>
-      </div>
-      <div class="campo">
-          <label for="color">Color: <span class="obligatorio">*</span></label>
-          <select id="color" name="color" required> 
-              <option value="" disabled selected>Selecciona un color...</option>
-              <option value="Gris">Gris</option>
-              <option value="Negro">Negro</option>
-              <option value="Blanco">Blanco</option>
-              <option value="Rojo">Rojo</option>
-              <option value="Azul">Azul</option>
-          </select>
-      </div>
-      <div class="campo">
-          <label for="so">Sistema Operativo: <span class="obligatorio">*</span></label>
-          <select id="so" name="so" required> 
-              <option value="" disabled selected>Selecciona un SO...</option>
-              <option value="Windows 11">Windows 11</option>
-              <option value="Windows 10">Windows 10</option>
-              <option value="macOS">macOS</option>
-              <option value="Linux">Linux</option>
-              <option value="Otro">Otro</option>
-          </select>
-      </div>
+    <div class="campo">
+      <label for="marca">Marca del equipo: <span class="obligatorio">*</span></label>
+      <select id="marca" formControlName="marca" required>
+        <option value="" disabled selected>Selecciona una marca...</option>
+        <option value="Asus">Asus</option>
+        <option value="Lenovo">Lenovo</option>
+        <option value="HP">HP</option>
+        <option value="Dell">Dell</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="color">Color: <span class="obligatorio">*</span></label>
+      <select id="color" formControlName="color" required>
+        <option value="" disabled selected>Selecciona un color...</option>
+        <option value="Gris">Gris</option>
+        <option value="Negro">Negro</option>
+        <option value="Blanco">Blanco</option>
+        <option value="Rojo">Rojo</option>
+        <option value="Azul">Azul</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="so">Sistema Operativo: <span class="obligatorio">*</span></label>
+      <select id="so" formControlName="sistemaOperativo" required>
+        <option value="" disabled selected>Selecciona un SO...</option>
+        <option value="Windows 11">Windows 11</option>
+        <option value="Windows 10">Windows 10</option>
+        <option value="macOS">macOS</option>
+        <option value="Linux">Linux</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
   </div>
 
   <div class="fila">
-      <div class="campo">
-          <label for="titulo">Título breve del problema:</label>
-          <input type="text" id="titulo" name="titulo"> 
-      </div>
-      <div class="campo">
-          <label for="error">Mensaje de error (si aparece):</label>
-          <input type="text" id="error" name="error"> 
-      </div>
+    <div class="campo">
+      <label for="titulo">Título breve del problema:</label>
+      <input type="text" id="titulo" formControlName="titulo" />
+    </div>
+    <div class="campo">
+      <label for="error">Mensaje de error (si aparece):</label>
+      <input type="text" id="error" formControlName="mensajeError" />
+    </div>
   </div>
 
   <div class="fila">
-      <div class="campo">
-          <label for="descripcion">Descripción detallada:</label>
-          <textarea id="descripcion" name="descripcion"></textarea> 
-      </div>
-      <div class="campo">
-          <label for="programa">Programa a instalar (opcional):</label>
-          <input type="text" id="programa" name="programa" placeholder="Especifique el programa...">
-      </div>
+    <div class="campo">
+      <label for="descripcion">Descripción detallada:</label>
+      <textarea id="descripcion" formControlName="descripcion"></textarea>
+    </div>
+    <div class="campo">
+      <label for="programa">Programa a instalar (opcional):</label>
+      <input type="text" id="programa" formControlName="nombrePrograma" placeholder="Especifique el programa..." />
+    </div>
   </div>
 
   <div class="fila">
-      <div class="grupo-checkbox ancho-total">
-          <div class="campo-checkbox">
-              <input type="checkbox" id="check-ram" name="check-ram">
-              <label for="check-ram">Instalación de RAM</label>
-          </div>
-          <div class="campo-checkbox">
-              <input type="checkbox" id="check-ssd" name="check-ssd">
-              <label for="check-ssd">Instalación de SSD</label>
-          </div>
-          <div class="campo-checkbox">
-              <input type="checkbox" id="check-preventivo" name="check-preventivo">
-              <label for="check-preventivo">Mantenimiento preventivo</label>
-          </div>
+    <div class="grupo-checkbox ancho-total">
+      <div class="campo-checkbox">
+        <input type="checkbox" id="check-ram" formControlName="instalaRam" />
+        <label for="check-ram">Instalación de RAM</label>
       </div>
+      <div class="campo-checkbox">
+        <input type="checkbox" id="check-ssd" formControlName="instalaSsd" />
+        <label for="check-ssd">Instalación de SSD</label>
+      </div>
+      <div class="campo-checkbox">
+        <input type="checkbox" id="check-preventivo" formControlName="mantenimiento" />
+        <label for="check-preventivo">Mantenimiento preventivo</label>
+      </div>
+    </div>
   </div>
 
   <div class="fila">
     <div class="campo-contrato ancho-total">
-        <input type="checkbox" id="check-contrato" name="check-contrato" required> 
-        <label for="check-contrato">
-            He leído y acepto los 
-            <a href="archivo.txt" target="_blank" rel="noopener noreferrer">
-              Términos y Condiciones del Servicio
-            </a>
-            <span class="obligatorio">*</span>
-        </label>
+      <input type="checkbox" id="check-contrato" formControlName="aceptaConfirmacion" required />
+      <label for="check-contrato">
+        He leído y acepto los
+        <a href="archivo.txt" target="_blank" rel="noopener noreferrer">Términos y Condiciones del Servicio</a>
+        <span class="obligatorio">*</span>
+      </label>
     </div>
   </div>
-  
-  <button type="submit">Enviar Solicitud</button>
 
+  <button type="submit">Enviar Solicitud</button>
 </div>

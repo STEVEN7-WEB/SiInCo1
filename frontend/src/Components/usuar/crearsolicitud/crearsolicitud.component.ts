@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-crearsolicitud',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule 
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './crearsolicitud.component.html',
   styleUrls: ['./crearsolicitud.component.css']
 })
 export class CrearSolicitudComponent implements OnInit {
-
   formularioMantenimiento!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.formularioMantenimiento = this.fb.group({
@@ -27,36 +23,31 @@ export class CrearSolicitudComponent implements OnInit {
       titulo: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
       mensajeError: [''],
-
-      // Cuadrados de selección
       instalaRam: [false],
       instalaSsd: [false],
       mantenimiento: [false],
-      instalaPrograma: [false],
       nombrePrograma: [''],
-
-      // Confirmación
       aceptaConfirmacion: [false, Validators.requiredTrue]
-    });
-
-    this.formularioMantenimiento.get('instalaPrograma')?.valueChanges.subscribe(valor => {
-      const nombrePrograma = this.formularioMantenimiento.get('nombrePrograma');
-      if (valor) {
-        nombrePrograma?.setValidators([Validators.required]);
-      } else {
-        nombrePrograma?.clearValidators();
-      }
-      nombrePrograma?.updateValueAndValidity();
     });
   }
 
   enviarSolicitud(): void {
-    if (this.formularioMantenimiento.valid) {
-      console.log('Solicitud enviada:', this.formularioMantenimiento.value);
-      alert('✅ Solicitud enviada correctamente');
-      this.formularioMantenimiento.reset();
-    } else {
+    if (this.formularioMantenimiento.invalid) {
       alert('⚠️ Por favor completa todos los campos requeridos');
+      return;
     }
+
+    const datos = this.formularioMantenimiento.value;
+
+    this.http.post('http://127.0.0.1:8000/api/solicitudes', datos).subscribe({
+      next: (res: any) => {
+        alert('✅ Solicitud registrada correctamente');
+        this.formularioMantenimiento.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        alert('❌ Error al registrar la solicitud');
+      }
+    });
   }
 }

@@ -18,7 +18,7 @@ import { VentanaadminComponent } from './Components/ventanaadmin/ventanaadmin.co
 // --- Componentes Hijos ---
 import { CrearSolicitudComponent } from './Components/usuar/crearsolicitud/crearsolicitud.component';
 import { BienvenidaComponent } from './Components/usuar/bienvenida/bienvenida.component';
-import { Versolicitud } from './Components/usuar/versolicitud/versolicitud';
+import { VersolicitudComponent } from './Components/usuar/versolicitud/versolicitud.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -38,7 +38,7 @@ bootstrapApplication(AppComponent, {
           { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
           { path: 'bienvenida', component: BienvenidaComponent },
           { path: 'crear-solicitud', component: CrearSolicitudComponent },
-          { path: 'mis-solicitudes', component: Versolicitud },
+          { path: 'mis-solicitudes', component: VersolicitudComponent },
         ]
       },
     ]),
