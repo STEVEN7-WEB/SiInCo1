@@ -1,7 +1,8 @@
 <div class="contenedor-formulario">
   <h2>Consulta de Solicitudes de Mantenimiento</h2>
+
   <div class="tabla-contenedor">
-    <table>
+    <table class="tabla-solicitudes">
       <thead>
         <tr>
           <th>N°</th>
@@ -13,6 +14,7 @@
           <th>Estatus</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let solicitud of solicitudes">
           <td>{{ solicitud.numero }}</td>
@@ -21,9 +23,19 @@
           <td>{{ solicitud.color }}</td>
           <td>{{ solicitud.so }}</td>
           <td>{{ solicitud.titulo }}</td>
-          <td>{{ solicitud.estatus }}</td>
+          <td>
+            <span class="estatus"
+                  [ngClass]="{
+                    'pendiente': solicitud.estatus === 'Pendiente',
+                    'en-proceso': solicitud.estatus === 'En proceso',
+                    'completado': solicitud.estatus === 'Completado'
+                  }">
+              {{ solicitud.estatus }}
+            </span>
+          </td>
         </tr>
       </tbody>
+
     </table>
   </div>
 </div>

@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-miperfil',
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './miperfil.component.html',
   styleUrls: ['./miperfil.component.css']
 })
 export class MiperfilComponent implements OnInit {
+  usuario: any = null; // Datos del usuario
+  apiUsuario = 'http://127.0.0.1:8000/api/usuario/numcontrol/'; // Ajusta según tu ruta Laravel
 
-  usuario = {
-    nombre: 'Sergio Steven Martínez Martínez',
-    numControl: '21690067',
-    carrera: 'Ingeniería en Sistemas Computacionales',
-    celular: '55 1234 5678',
-    preguntaSeguridad: 'Nombre de tu primera mascota',
-    respuestaSeguridad: 'Rocky'
-  };
-
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    // Aquí podrías cargar los datos reales desde un servicio o localStorage
+    const numControl = localStorage.getItem('numControl');
+    if (!numControl) return;
+
+    this.http.get<any>(this.apiUsuario + numControl).subscribe({
+      next: (res) => {
+        this.usuario = res;
+      },
+      error: (err) => console.error('Error al cargar datos del usuario:', err)
+    });
   }
 
   irAActualizar() {

@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-inicio-sesion',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './inicio-sesion.component.html',
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
   loginForm!: FormGroup;
-  selectedRole: 'usuario' | 'admin' = 'usuario';
+  selectedRole: 'usuario' | 'docente' | 'admin' = 'usuario';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private http: HttpClient
-  ) {}
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -34,26 +31,44 @@ export class InicioSesionComponent implements OnInit {
       return;
     }
 
-    // 🔹 LOGIN DE USUARIO NORMAL
     if (this.selectedRole === 'usuario') {
       const datos = {
-        numControl: this.loginForm.value.usuario, // ✅ debe coincidir con el backend
+        numControl: this.loginForm.value.usuario,
         password: this.loginForm.value.contrasena
       };
 
       this.http.post('http://127.0.0.1:8000/api/login', datos).subscribe({
         next: (res: any) => {
-          alert(`Bienvenido ${res.user.nombre} ✅`);
-          localStorage.setItem('usuario', JSON.stringify(res.user));
+          localStorage.setItem('numControl', res.usuario.numControl); // 🔹 Guardamos numControl
+          localStorage.setItem('usuario', JSON.stringify(res.usuario));
+          alert(`Bienvenido ${res.usuario.nombre} ✅`);
           this.router.navigate(['/usuar']);
         },
-        error: (err) => {
-          alert(err.error.message || 'Usuario o contraseña incorrectos ❌');
-        }
+        error: (err) => alert(err.error.message || 'Usuario o contraseña incorrectos ❌')
       });
 
-    } else {
-      // 🔹 LOGIN DE ADMIN LOCAL
+      return;
+    }
+
+    if (this.selectedRole === 'docente') {
+      const datosDocente = {
+        usuario: this.loginForm.value.usuario,
+        contrasena: this.loginForm.value.contrasena
+      };
+
+      this.http.post('http://127.0.0.1:8000/api/login-docente', datosDocente).subscribe({
+        next: (res: any) => {
+          localStorage.setItem('docente', JSON.stringify(res));
+          alert(`Bienvenido Docente ${res.nombre} 👨‍🏫`);
+          this.router.navigate(['/docente']);
+        },
+        error: (err) => alert(err.error.message || 'Credenciales de docente inválidas ❌')
+      });
+
+      return;
+    }
+
+    if (this.selectedRole === 'admin') {
       const adminUser = { usuario: 'admin', contrasena: '1234' };
       if (
         this.loginForm.value.usuario === adminUser.usuario &&
@@ -75,7 +90,7 @@ export class InicioSesionComponent implements OnInit {
     this.router.navigate(['/olvide-contrasena']);
   }
 
-  seleccionarRol(rol: 'usuario' | 'admin'): void {
+  seleccionarRol(rol: 'usuario' | 'docente' | 'admin'): void {
     this.selectedRole = rol;
     this.loginForm.reset();
   }

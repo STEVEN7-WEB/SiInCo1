@@ -24,7 +24,9 @@ public function up(): void
         $table->boolean('instalaRam')->default(false);
         $table->boolean('instalaSsd')->default(false);
         $table->boolean('mantenimiento')->default(false);
+        $table->boolean('instalaPrograma')->default(false);
         $table->string('nombrePrograma')->nullable();
+        $table->boolean('aceptaConfirmacion')->default(false);
         $table->timestamps();
     });
 }

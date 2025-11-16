@@ -2,25 +2,47 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SolicitudController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| Aquí se registran las rutas API de la aplicación.
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-use App\Http\Controllers\UsuarioController;
-
+// ------------------------------------------------------
+// 🔹 AUTENTICACIÓN Y REGISTRO
+// ------------------------------------------------------
 Route::post('/registrar', [UsuarioController::class, 'registrar']);
-Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/login', [UsuarioController::class, 'login']);
+Route::post('/login-docente', [AuthController::class, 'loginDocente']);
 
-Route::post('/solicitudes', [SolicitudController::class, 'store']); // Crear solicitud
-Route::get('/solicitudes', [SolicitudController::class, 'index']);  // Listar solicitudes
+// ------------------------------------------------------
+// 🔹 SOLICITUDES
+// ------------------------------------------------------
+Route::post('/solicitud', [SolicitudController::class, 'store']); // Crear solicitud
+Route::get('/solicitudes-usuario/{numControl}', [SolicitudController::class, 'solicitudesUsuario']); // Solo del usuario
+Route::get('/solicitudes', [SolicitudController::class, 'obtenerSolicitudes']); // Para admin
+
+// ------------------------------------------------------
+// 🔹 USUARIO
+// ------------------------------------------------------
+Route::prefix('usuario')->group(function () {
+    // 🔹 Obtener usuario por numControl
+    Route::get('/numcontrol/{numControl}', [UsuarioController::class, 'usuarioPorNumControl']);
+
+    // 🔹 Obtener usuario por ID
+    Route::get('/id/{id}', [UsuarioController::class, 'show']);
+
+    // 🔹 Actualizar usuario por ID
+    Route::put('/id/{id}', [UsuarioController::class, 'update']);
+
+    // 🔹 Recuperación de contraseña
+    Route::post('/verificar', [UsuarioController::class, 'verificarRecuperacion']);
+    Route::post('/actualizar-contrasena', [UsuarioController::class, 'actualizarContrasena']);
+});

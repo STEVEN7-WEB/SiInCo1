@@ -11,14 +11,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrls: ['./crearsolicitud.component.css']
 })
 export class CrearSolicitudComponent implements OnInit {
-
   formularioMantenimiento!: FormGroup;
-  apiUrl = 'http://127.0.0.1:8000/api/solicitudes';
+  apiUrl = 'http://127.0.0.1:8000/api/solicitud';
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.formularioMantenimiento = this.fb.group({
+      numControl: [localStorage.getItem('numControl'), Validators.required], // 🔹 numControl
       marca: ['', Validators.required],
       color: ['', Validators.required],
       sistemaOperativo: ['', Validators.required],
@@ -47,7 +47,7 @@ export class CrearSolicitudComponent implements OnInit {
   enviarSolicitud(): void {
     if (this.formularioMantenimiento.valid) {
       this.http.post(this.apiUrl, this.formularioMantenimiento.value).subscribe({
-        next: (res: any) => {
+        next: () => {
           alert('✅ Solicitud enviada correctamente');
           this.formularioMantenimiento.reset();
         },

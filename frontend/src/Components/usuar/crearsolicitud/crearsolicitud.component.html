@@ -1,7 +1,9 @@
 <div class="contenedor-formulario">
   <h2>Registrar Solicitud de Mantenimiento</h2>
+
   <form [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
 
+    <!-- FILA 1: Marca, color, SO -->
     <div class="fila fila-de-tres">
       <div class="campo">
         <label>Marca del equipo *</label>
@@ -13,6 +15,7 @@
           <option value="Dell">Dell</option>
         </select>
       </div>
+
       <div class="campo">
         <label>Color *</label>
         <select formControlName="color">
@@ -24,6 +27,7 @@
           <option value="Azul">Azul</option>
         </select>
       </div>
+
       <div class="campo">
         <label>Sistema Operativo *</label>
         <select formControlName="sistemaOperativo">
@@ -37,34 +41,50 @@
       </div>
     </div>
 
+    <!-- FILA 2: Título y mensaje de error -->
     <div class="fila">
       <div class="campo">
         <label>Título breve del problema *</label>
         <input type="text" formControlName="titulo">
       </div>
+
       <div class="campo">
         <label>Mensaje de error (opcional)</label>
         <input type="text" formControlName="mensajeError">
       </div>
     </div>
 
+    <!-- FILA 3: Descripción + programa -->
     <div class="fila">
       <div class="campo">
         <label>Descripción detallada *</label>
         <textarea formControlName="descripcion"></textarea>
       </div>
+
       <div class="campo">
         <label>Programa a instalar (opcional)</label>
-        <input type="text" formControlName="nombrePrograma" [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
+        <input type="text" formControlName="nombrePrograma"
+               [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
+
         <label>
-          <input type="checkbox" formControlName="instalaPrograma"> Instalar programa
+          <input type="checkbox" formControlName="instalaPrograma">
+          Instalar programa
         </label>
       </div>
     </div>
 
+    <!-- FILA 4: OTROS CHECKBOX -->
+    <div class="fila">
+      <label><input type="checkbox" formControlName="instalaRam"> Instalar RAM</label>
+      <label><input type="checkbox" formControlName="instalaSsd"> Instalar SSD</label>
+      <label><input type="checkbox" formControlName="mantenimiento"> Mantenimiento general</label>
+    </div>
+
+    <!-- FILA 5: Confirmación -->
     <div class="fila">
       <label>
-        <input type="checkbox" formControlName="aceptaConfirmacion"> Acepto los términos *
+        <input type="checkbox" formControlName="aceptaConfirmacion">
+        Acepto los términos *
       </label>
     </div>
 

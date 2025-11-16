@@ -14,12 +14,12 @@ import { OlvideContrasenaComponent } from './Components/olvide-contrasena/olvide
 // --- Componentes Layout (Padres) ---
 import { VentanaUsuarioComponent } from './Components/ventanausuario/ventanausuario.component';
 import { VentanaadminComponent } from './Components/ventanaadmin/ventanaadmin.component';
-
+import { Ventanadocente } from './Components/ventanadocente/ventanadocente.component';
 // --- Componentes Hijos ---
 import { CrearSolicitudComponent } from './Components/usuar/crearsolicitud/crearsolicitud.component';
 import { BienvenidaComponent } from './Components/usuar/bienvenida/bienvenida.component';
 import { VersolicitudComponent } from './Components/usuar/versolicitud/versolicitud.component';
-
+import { MiperfilComponent } from './Components/usuar/miperfil/miperfil.component';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
@@ -34,6 +34,16 @@ bootstrapApplication(AppComponent, {
       {
         path: 'usuar',
         component: VentanaUsuarioComponent,
+        children: [
+          { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+          { path: 'bienvenida', component: BienvenidaComponent },
+          { path: 'crear-solicitud', component: CrearSolicitudComponent },
+          { path: 'mis-solicitudes', component: VersolicitudComponent },
+          { path: 'mi-perfil', component: MiperfilComponent }, // 👉 Temporal
+        ]
+      },
+      {
+        path: 'docente', component: Ventanadocente,
         children: [
           { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
           { path: 'bienvenida', component: BienvenidaComponent },

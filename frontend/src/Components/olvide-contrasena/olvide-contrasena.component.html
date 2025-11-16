@@ -1,4 +1,4 @@
-<div class="forgot-wrapper">
+<div class="forgot-wrapper"> 
 
   <div class="forgot-left">
     <div class="logo-box">
@@ -10,16 +10,17 @@
 
     <h2 class="title">Recuperar Contraseña</h2>
 
-    <form [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
+    <!-- PRIMER FORMULARIO: Validar usuario -->
+    <form *ngIf="paso === 1" [formGroup]="forgotForm" (ngSubmit)="revisarUsuario()">
 
       <label class="input-label">Número de control</label>
-      <input type="text" formControlName="numControl" class="input-field" placeholder="Ej. 123456">
+      <input type="text" formControlName="numControl" class="input-field">
 
       <label class="input-label">Número de celular</label>
-      <input type="text" formControlName="celular" class="input-field" placeholder="Tu número de celular registrado">
+      <input type="text" formControlName="celular" class="input-field">
 
       <label class="input-label">Respuesta de seguridad</label>
-      <input type="text" formControlName="respuestaSeguridad" class="input-field" placeholder="Escribe tu respuesta secreta...">
+      <input type="text" formControlName="respuestaSeguridad" class="input-field">
 
       <div class="buttons">
         <button type="submit" class="btn btn-primary">RECUPERAR</button>
@@ -28,9 +29,22 @@
 
     </form>
 
+    <!-- SEGUNDO FORMULARIO: Cambiar contraseña -->
+    <form *ngIf="paso === 2" [formGroup]="resetForm" (ngSubmit)="actualizarPassword()">
+
+      <label class="input-label">Nueva contraseña</label>
+      <input type="password" formControlName="password" class="input-field">
+
+      <label class="input-label">Confirmar contraseña</label>
+      <input type="password" formControlName="password2" class="input-field">
+
+      <div class="buttons">
+        <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
+      </div>
+    </form>
+
     <div class="result" *ngIf="mensaje">
       {{ mensaje }}
     </div>
   </div>
 </div>
-

@@ -1,14 +1,43 @@
-<h2 class="title">Perfil del Usuario</h2>
+<div class="perfil-container">
+  <h2 class="title">Perfil del Usuario</h2>
 
-<div class="perfil-datos">
-  <p><strong>Nombre completo:</strong> {{ usuario.nombre }}</p>
-  <p><strong>Número de control:</strong> {{ usuario.numControl }}</p>
-  <p><strong>Carrera:</strong> {{ usuario.carrera }}</p>
-  <p><strong>Celular:</strong> {{ usuario.celular }}</p>
-  <p><strong>Pregunta de seguridad:</strong> {{ usuario.preguntaSeguridad }}</p>
-  <p><strong>Respuesta de seguridad:</strong> {{ usuario.respuestaSeguridad }}</p>
-</div>
+  <div *ngIf="usuario && usuario.numControl; else cargando" class="perfil-grid">
+    <div class="perfil-item">
+      <p class="item-label">Nombre completo</p>
+      <p class="item-value">{{ usuario.nombre }}</p>
+    </div>
 
-<div class="buttons">
-  <button class="btn btn-primary" (click)="irAActualizar()">ACTUALIZAR DATOS</button>
+    <div class="perfil-item">
+      <p class="item-label">Número de control</p>
+      <p class="item-value">{{ usuario.numControl }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Carrera</p>
+      <p class="item-value">{{ usuario.carrera }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Celular</p>
+      <p class="item-value">{{ usuario.celular }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Pregunta de seguridad</p>
+      <p class="item-value">{{ usuario.preguntaSeguridad }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Respuesta de seguridad</p>
+      <p class="item-value">{{ usuario.respuestaSeguridad }}</p>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary" (click)="irAActualizar()">Actualizar Datos</button>
+    </div>
+  </div>
+
+  <ng-template #cargando>
+    <p class="cargando-text">Cargando perfil...</p>
+  </ng-template>
 </div>
