@@ -1,11 +1,9 @@
+// src/Components/admin/bienvenida/bienvenida.component.ts
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-bienvenida',
-  imports: [],
   templateUrl: './bienvenida.component.html',
-  styleUrl: './bienvenida.component.css',
+  styleUrls: ['./bienvenida.component.css'], // ❌ Antes estaba styleUrl
 })
-export class BienvenidaComponent {
-
-}
+export class BienvenidaComponent {}

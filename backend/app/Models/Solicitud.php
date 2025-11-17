@@ -24,6 +24,7 @@ class Solicitud extends Model
         'mantenimiento',
         'instalaPrograma',
         'nombrePrograma',
-        'aceptaConfirmacion'
+        'aceptaConfirmacion',
+            'estatus' // 🔹 este es necesario
     ];
 }

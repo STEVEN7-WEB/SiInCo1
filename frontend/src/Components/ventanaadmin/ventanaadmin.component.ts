@@ -1,3 +1,4 @@
+// src/Components/ventanaadmin/ventanaadmin.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';

@@ -1,1 +1,65 @@
-<p>revisar works!</p>
+<h2>Revision de solicitudes</h2>
+<div *ngIf="cargando">
+  <p style="color: white;">Cargando solicitudes...</p>
+</div>
+
+<div *ngIf="!cargando && solicitudes.length === 0">
+  <p style="color: white;">No hay solicitudes registradas.</p>
+</div>
+
+<div *ngIf="!cargando && solicitudes.length > 0" class="solicitudes-grid">
+  <button *ngFor="let s of solicitudes" 
+          class="btn-solicitud" 
+          [ngClass]="{
+            'pendiente': s.estatus === 'Pendiente',
+            'en-proceso': s.estatus === 'En revisión',
+            'finalizado': s.estatus === 'Finalizado',
+            'cancelado': s.estatus === 'Cancelado'
+          }"
+          (click)="abrirModal(s)">
+    {{ s.titulo }}
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="solicitudSeleccionada">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ solicitudSeleccionada.titulo }}</h2>
+      <button class="close-btn" (click)="cerrarModal()">✖</button>
+    </div>
+
+    <div class="modal-body">
+      <p><strong>Marca:</strong> {{ solicitudSeleccionada.marca }}</p>
+      <p><strong>Color:</strong> {{ solicitudSeleccionada.color }}</p>
+      <p><strong>Sistema Operativo:</strong> {{ solicitudSeleccionada.so }}</p>
+      <p><strong>Descripción:</strong> {{ solicitudSeleccionada.descripcion }}</p>
+      <p><strong>Mensaje de error:</strong> {{ solicitudSeleccionada.mensajeError }}</p>
+      <p><strong>Instala RAM:</strong> {{ solicitudSeleccionada.instalaRam }}</p>
+      <p><strong>Instala SSD:</strong> {{ solicitudSeleccionada.instalaSsd }}</p>
+      <p><strong>Mantenimiento:</strong> {{ solicitudSeleccionada.mantenimiento }}</p>
+      <p><strong>Instala Programa:</strong> {{ solicitudSeleccionada.instalaPrograma }}</p>
+      <p><strong>Nombre Programa:</strong> {{ solicitudSeleccionada.nombrePrograma }}</p>
+      <p><strong>Acepta Confirmación:</strong> {{ solicitudSeleccionada.aceptaConfirmacion }}</p>
+      <p><strong>Estatus:</strong> 
+        <span [ngClass]="{
+          'pendiente': solicitudSeleccionada.estatus === 'Pendiente',
+          'en-proceso': solicitudSeleccionada.estatus === 'En revisión',
+          'finalizado': solicitudSeleccionada.estatus === 'Finalizado',
+          'cancelado': solicitudSeleccionada.estatus === 'Cancelado'
+        }">{{ solicitudSeleccionada.estatus }}</span>
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="cambiarEstatus(solicitudSeleccionada, 'En revisión')">En revisión</button>
+      <button (click)="cambiarEstatus(solicitudSeleccionada, 'Finalizado')">Finalizado</button>
+      <button (click)="cambiarEstatus(solicitudSeleccionada, 'Cancelado')">Cancelado</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" *ngIf="toastVisible">
+  {{ toastMensaje }}
+</div>

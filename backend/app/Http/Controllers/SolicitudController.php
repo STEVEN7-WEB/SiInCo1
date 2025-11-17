@@ -70,4 +70,11 @@ class SolicitudController extends Controller
     {
         return Solicitud::orderBy('created_at', 'desc')->get();
     }
+    public function actualizarEstatus($id, Request $request) {
+    $solicitud = Solicitud::findOrFail($id);
+    $solicitud->estatus = $request->estatus;
+    $solicitud->save();
+
+    return response()->json($solicitud);
+}
 }
