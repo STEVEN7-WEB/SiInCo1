@@ -25,6 +25,6 @@ class Solicitud extends Model
         'instalaPrograma',
         'nombrePrograma',
         'aceptaConfirmacion',
-            'estatus' // 🔹 este es necesario
+        'estatus' 
     ];
 }

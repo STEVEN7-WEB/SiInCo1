@@ -8,7 +8,7 @@ use App\Models\User;
 
 class SolicitudController extends Controller
 {
-    // Registrar una nueva solicitud
+    // Registrar solicitud
     public function store(Request $request)
     {
         $request->validate([
@@ -54,7 +54,6 @@ class SolicitudController extends Controller
         ], 201);
     }
 
-    // Obtener solicitudes de un usuario específico por numControl
     public function solicitudesUsuario($numControl)
     {
         $user = User::where('numControl', $numControl)->first();
@@ -65,7 +64,7 @@ class SolicitudController extends Controller
                         ->get();
     }
 
-    // Obtener todas las solicitudes (admin)
+    // pal mero admin
     public function obtenerSolicitudes()
     {
         return Solicitud::orderBy('created_at', 'desc')->get();

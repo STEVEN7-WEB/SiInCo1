@@ -15,15 +15,12 @@ use App\Http\Controllers\SolicitudController;
 |
 */
 
-// ------------------------------------------------------
-// 🔹 AUTENTICACIÓN Y REGISTRO
-// ------------------------------------------------------
 Route::post('/registrar', [UsuarioController::class, 'registrar']);
 Route::post('/login', [UsuarioController::class, 'login']);
 Route::post('/login-docente', [AuthController::class, 'loginDocente']);
 
 Route::post('/solicitud', [SolicitudController::class, 'store']); 
-Route::get('/solicitudes-usuario/{numControl}', [SolicitudController::class, 'solicitudesUsuario']); // Solo del usuario
+Route::get('/solicitudes-usuario/{numControl}', [SolicitudController::class, 'solicitudesUsuario']); 
 Route::get('/solicitudes', [SolicitudController::class, 'obtenerSolicitudes']);
 Route::patch('/solicitudes/{id}/estatus', [SolicitudController::class, 'actualizarEstatus']);
 

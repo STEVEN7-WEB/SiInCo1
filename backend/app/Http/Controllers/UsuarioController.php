@@ -58,7 +58,6 @@ class UsuarioController extends Controller
         return response()->json($usuario);
     }
 
-    // Recuperación y actualización de contraseña
     public function verificarRecuperacion(Request $request)
     {
         $user = User::where('numControl', $request->numControl)
@@ -78,7 +77,6 @@ class UsuarioController extends Controller
         return response()->json(['success' => true, 'message' => 'Contraseña actualizada ✅']);
     }
 
-    // 🔹 Obtener usuario por numControl (para crear solicitud)
     public function usuarioPorNumControl($numControl)
     {
         $user = User::where('numControl', $numControl)->first();
