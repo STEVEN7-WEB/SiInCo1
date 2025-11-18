@@ -5,15 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SolicitudController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Aquí se registran las rutas API de la aplicación.
-|
-*/
+use App\Http\Controllers\InventarioController;
 
 Route::post('/registrar', [UsuarioController::class, 'registrar']);
 Route::post('/login', [UsuarioController::class, 'login']);
@@ -31,3 +23,6 @@ Route::prefix('usuario')->group(function () {
     Route::post('/verificar', [UsuarioController::class, 'verificarRecuperacion']);
     Route::post('/actualizar-contrasena', [UsuarioController::class, 'actualizarContrasena']);
 });
+
+// 🚀 Ruta correcta para inventario (fuera del grupo usuario)
+Route::post('/inventario', [InventarioController::class, 'store']);

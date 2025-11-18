@@ -22,10 +22,11 @@ import { BienvenidaComponent } from './Components/usuar/bienvenida/bienvenida.co
 import { VersolicitudComponent } from './Components/usuar/versolicitud/versolicitud.component';
 import { MiperfilComponent } from './Components/usuar/miperfil/miperfil.component';
 import { AyudaComponent } from './Components/usuar/ayuda/ayuda.component';
+import { VideoComponent } from './Components/usuar/video/video.component';
 // --- Componentes Hijos Admin ---
 import { BienvenidaComponent as BienvenidaAdminComponent } from './Components/admin/bienvenida/bienvenida.component';
 import { RevisarComponent } from './Components/admin/revisar/revisar.component';
-
+import { CargainventarioComponent } from './Components/admin/cargainventario/cargainventario.component';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
@@ -46,6 +47,7 @@ bootstrapApplication(AppComponent, {
           { path: 'mis-solicitudes', component: VersolicitudComponent },
           { path: 'mi-perfil', component: MiperfilComponent },
           { path: 'ayuda', component: AyudaComponent },
+          { path: 'configuracion', component: VideoComponent },
         ]
       },
 
@@ -69,6 +71,7 @@ bootstrapApplication(AppComponent, {
           { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
           { path: 'bienvenida', component: BienvenidaAdminComponent },
           { path: 'revisar-solicitudes', component: RevisarComponent },
+          { path: 'cargar-inventario', component: CargainventarioComponent },
         ]
       },
     ]),
