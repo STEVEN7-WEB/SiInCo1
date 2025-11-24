@@ -1,0 +1,59 @@
+<form (ngSubmit)="agregarUsuario()">
+
+  <!-- Título -->
+  <h2>Agregar más usuarios</h2>
+
+  <!-- Botones para cambiar de rol -->
+  <div class="form-row" style="justify-content: center; margin-bottom: 20px;">
+    <button type="button" class="btn btn-primary" [disabled]="rol==='admin'" (click)="cambiarRol('admin')">Admin</button>
+    <button type="button" class="btn btn-primary" [disabled]="rol==='docente'" (click)="cambiarRol('docente')">Docente</button>
+  </div>
+
+  <!-- Fila 1: Nombre, Fecha, Usuario -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Nombre completo</label>
+      <input type="text" class="input-field" [(ngModel)]="nombre" name="nombre">
+    </div>
+    <div class="form-group">
+      <label>Fecha de nacimiento</label>
+      <input type="date" class="input-field" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+    </div>
+    <div class="form-group">
+      <label>Usuario</label>
+      <input type="text" class="input-field" [value]="generarUsuario()" placeholder="Se genera solo" readonly>
+    </div>
+  </div>
+
+  <!-- Fila 2: Teléfono, Sexo, Contraseña -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="text" class="input-field" [(ngModel)]="telefono" name="telefono">
+    </div>
+    <div class="form-group">
+      <label>Sexo</label>
+      <input type="text" class="input-field" [(ngModel)]="sexo" name="sexo">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" class="input-field" [(ngModel)]="contrasena" name="contrasena">
+    </div>
+  </div>
+
+  <!-- Fila 3: Campos extra para Docente + Botón -->
+  <div class="form-row">
+    <div class="form-group" *ngIf="rol==='docente'">
+      <label>Correo</label>
+      <input type="email" class="input-field" [(ngModel)]="correo" name="correo">
+    </div>
+    <div class="form-group" *ngIf="rol==='docente'">
+      <label>Carrera</label>
+      <input type="text" class="input-field" [(ngModel)]="carrera" name="carrera">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+    </div>
+  </div>
+
+</form>

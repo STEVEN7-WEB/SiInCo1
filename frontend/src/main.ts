@@ -27,6 +27,7 @@ import { VideoComponent } from './Components/usuar/video/video.component';
 import { BienvenidaComponent as BienvenidaAdminComponent } from './Components/admin/bienvenida/bienvenida.component';
 import { RevisarComponent } from './Components/admin/revisar/revisar.component';
 import { CargainventarioComponent } from './Components/admin/cargainventario/cargainventario.component';
+import { CargarusuariosComponent } from './Components/admin/cargarusuarios/cargarusuarios.component';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
@@ -72,6 +73,7 @@ bootstrapApplication(AppComponent, {
           { path: 'bienvenida', component: BienvenidaAdminComponent },
           { path: 'revisar-solicitudes', component: RevisarComponent },
           { path: 'cargar-inventario', component: CargainventarioComponent },
+          { path: 'cargar-usuarios', component: CargarusuariosComponent },
         ]
       },
     ]),

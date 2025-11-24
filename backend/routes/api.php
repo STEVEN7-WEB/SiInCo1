@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\AdminDocenteController;
 
 Route::post('/registrar', [UsuarioController::class, 'registrar']);
 Route::post('/login', [UsuarioController::class, 'login']);
@@ -26,3 +27,6 @@ Route::prefix('usuario')->group(function () {
 
 // 🚀 Ruta correcta para inventario (fuera del grupo usuario)
 Route::post('/inventario', [InventarioController::class, 'store']);
+
+//Ruta para Admin y Docente
+Route::post('/admin-docente', [AdminDocenteController::class, 'store']);
