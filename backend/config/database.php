@@ -8,26 +8,21 @@ return [
 
     'connections' => [
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => null, // desactivamos DATABASE_URL porque causa conflictos
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'sslmode' => env('DB_SSLMODE', 'require'),
-
-            // Aquí está la clave: "options" DEBE SER ARRAY
-            'options' => array_filter([
-                PDO::ATTR_EMULATE_PREPARES => true,
-                // Pasamos el endpoint para SNI
-                'endpoint' => env('DB_OPTION_ENDPOINT', null),
-            ]),
-        ],
+'pgsql' => [
+    'driver' => 'pgsql',
+    'host' => env('DB_HOST'),
+    'port' => env('DB_PORT'),
+    'database' => env('DB_DATABASE'),
+    'username' => env('DB_USERNAME'),
+    'password' => env('DB_PASSWORD'),
+    'charset' => 'utf8',
+    'prefix' => '',
+    'schema' => 'public',
+    'sslmode' => env('DB_SSLMODE', 'require'),
+    'options' => extension_loaded('pdo_pgsql') ? [
+        'endpoint' => env('DB_OPTION_ENDPOINT')
+    ] : [],
+],
 
     ],
 
@@ -41,7 +36,7 @@ return [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
             'prefix' => env(
                 'REDIS_PREFIX',
-                Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'
+                Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'
             ),
         ],
 
