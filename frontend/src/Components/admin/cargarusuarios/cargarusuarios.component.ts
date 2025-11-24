@@ -15,6 +15,7 @@ export class CargarusuariosComponent {
   usuarios: any[] = [];
 
   nombre: string = '';
+  apellido: string = '';
   fechaNacimiento: string = '';
   telefono: string = '';
   sexo: string = '';
@@ -23,20 +24,22 @@ export class CargarusuariosComponent {
   contrasena: string = '';
 
   loading: boolean = false;
-  error: string = '';
-  success: string = '';
+
+  // Toast
+  toastMessage: string = '';
+  toastType: 'success' | 'error' | 'warning' = 'success';
+  showToast: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   cambiarRol(nuevoRol: 'admin' | 'docente') {
     this.rol = nuevoRol;
     this.limpiarCampos();
-    this.error = '';
-    this.success = '';
   }
 
   limpiarCampos() {
     this.nombre = '';
+    this.apellido = '';
     this.fechaNacimiento = '';
     this.telefono = '';
     this.sexo = '';
@@ -46,28 +49,32 @@ export class CargarusuariosComponent {
   }
 
   generarUsuario(): string {
-    if (!this.nombre || !this.fechaNacimiento) return '';
+    if (!this.nombre || !this.apellido || !this.fechaNacimiento) return '';
     const fecha = new Date(this.fechaNacimiento);
     const dia = String(fecha.getDate()).padStart(2, '0');
     const mes = String(fecha.getMonth() + 1).padStart(2, '0');
     const nombreSinEspacios = this.nombre.replace(/\s+/g, '').toLowerCase();
-    return `${nombreSinEspacios}${dia}${mes}`;
+    const apellidoSinEspacios = this.apellido.replace(/\s+/g, '').toLowerCase();
+    return `${nombreSinEspacios}${apellidoSinEspacios}${dia}${mes}`;
   }
 
   agregarUsuario() {
-    if (!this.nombre || !this.fechaNacimiento) {
-      this.error = 'Nombre y fecha de nacimiento son obligatorios.';
+    // Validación de todos los campos
+    if (!this.nombre || !this.apellido || !this.fechaNacimiento ||
+        !this.telefono || !this.sexo || !this.contrasena ||
+        (this.rol === 'docente' && (!this.correo || !this.carrera))) {
+      this.showToastMessage('⚠️ Completa todos los campos obligatorios', 'warning');
       return;
     }
 
     const usuarioData: any = {
       rol: this.rol,
-      nombre: this.nombre,
+      nombre: `${this.nombre} ${this.apellido}`,
       fechaNacimiento: this.fechaNacimiento,
       telefono: this.telefono,
       sexo: this.sexo,
       usuario: this.generarUsuario(),
-      contrasena: this.contrasena || '1234'
+      contrasena: this.contrasena
     };
 
     if (this.rol === 'docente') {
@@ -76,26 +83,39 @@ export class CargarusuariosComponent {
     }
 
     this.loading = true;
-    this.error = '';
-    this.success = '';
 
     // Guardar localmente
     this.usuarios.push(usuarioData);
 
-    // Guardar en Laravel en el nuevo endpoint AdminDocente
-    this.http.post('http://tu-laravel-app.test/api/admin-docente', usuarioData)
+    // Guardar en Laravel
+    this.http.post('http://localhost:8000/api/admin-docente', usuarioData)
       .subscribe({
         next: (res: any) => {
           this.loading = false;
-          this.success = 'Usuario guardado correctamente.';
-          console.log('Usuario guardado en Laravel:', res);
+          this.showToastMessage('✅ Usuario creado correctamente', 'success');
           this.limpiarCampos();
         },
         error: (err) => {
           this.loading = false;
-          this.error = 'Error al guardar usuario en Laravel.';
-          console.error('Error al guardar usuario:', err);
+          if (err.status === 422) {
+            this.showToastMessage('❌ Usuario ya existe o datos incorrectos', 'error');
+          } else {
+            this.showToastMessage('❌ Error al guardar usuario', 'error');
+          }
+          console.error(err);
         }
       });
+  }
+
+  showToastMessage(message: string, type: 'success' | 'error' | 'warning') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 3000);
+  }
+
+  // Función para clases dinámicas en los inputs según si están vacíos
+  campoVacio(campo: string): boolean {
+    return !campo;
   }
 }

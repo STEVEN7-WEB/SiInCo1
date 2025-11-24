@@ -1,23 +1,31 @@
+<h2>Agregar más usuarios</h2>
+
+<!-- Toast -->
+<div class="toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>
+
+<!-- Cambiar rol -->
+<div class="form-row" style="justify-content: center; margin-bottom: 20px;">
+  <button type="button" class="btn btn-primary" [disabled]="rol==='admin'" (click)="cambiarRol('admin')">Admin</button>
+  <button type="button" class="btn btn-primary" [disabled]="rol==='docente'" (click)="cambiarRol('docente')">Docente</button>
+</div>
+
 <form (ngSubmit)="agregarUsuario()">
 
-  <!-- Título -->
-  <h2>Agregar más usuarios</h2>
-
-  <!-- Botones para cambiar de rol -->
-  <div class="form-row" style="justify-content: center; margin-bottom: 20px;">
-    <button type="button" class="btn btn-primary" [disabled]="rol==='admin'" (click)="cambiarRol('admin')">Admin</button>
-    <button type="button" class="btn btn-primary" [disabled]="rol==='docente'" (click)="cambiarRol('docente')">Docente</button>
-  </div>
-
-  <!-- Fila 1: Nombre, Fecha, Usuario -->
+  <!-- Fila 1: Nombre, Apellido, Fecha, Usuario -->
   <div class="form-row">
     <div class="form-group">
-      <label>Nombre completo</label>
-      <input type="text" class="input-field" [(ngModel)]="nombre" name="nombre">
+      <label>Nombre</label>
+      <input type="text" class="input-field" [(ngModel)]="nombre" name="nombre" [class.input-error]="campoVacio(nombre)">
+    </div>
+    <div class="form-group">
+      <label>Apellido</label>
+      <input type="text" class="input-field" [(ngModel)]="apellido" name="apellido" [class.input-error]="campoVacio(apellido)">
     </div>
     <div class="form-group">
       <label>Fecha de nacimiento</label>
-      <input type="date" class="input-field" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+      <input type="date" class="input-field" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" [class.input-error]="campoVacio(fechaNacimiento)">
     </div>
     <div class="form-group">
       <label>Usuario</label>
@@ -29,30 +37,32 @@
   <div class="form-row">
     <div class="form-group">
       <label>Teléfono</label>
-      <input type="text" class="input-field" [(ngModel)]="telefono" name="telefono">
+      <input type="text" class="input-field" [(ngModel)]="telefono" name="telefono" [class.input-error]="campoVacio(telefono)">
     </div>
     <div class="form-group">
       <label>Sexo</label>
-      <input type="text" class="input-field" [(ngModel)]="sexo" name="sexo">
+      <input type="text" class="input-field" [(ngModel)]="sexo" name="sexo" [class.input-error]="campoVacio(sexo)">
     </div>
     <div class="form-group">
       <label>Contraseña</label>
-      <input type="password" class="input-field" [(ngModel)]="contrasena" name="contrasena">
+      <input type="password" class="input-field" [(ngModel)]="contrasena" name="contrasena" [class.input-error]="campoVacio(contrasena)">
     </div>
   </div>
 
-  <!-- Fila 3: Campos extra para Docente + Botón -->
+  <!-- Fila 3: Docente extra + botón -->
   <div class="form-row">
     <div class="form-group" *ngIf="rol==='docente'">
       <label>Correo</label>
-      <input type="email" class="input-field" [(ngModel)]="correo" name="correo">
+      <input type="email" class="input-field" [(ngModel)]="correo" name="correo" [class.input-error]="campoVacio(correo)">
     </div>
     <div class="form-group" *ngIf="rol==='docente'">
       <label>Carrera</label>
-      <input type="text" class="input-field" [(ngModel)]="carrera" name="carrera">
+      <input type="text" class="input-field" [(ngModel)]="carrera" name="carrera" [class.input-error]="campoVacio(carrera)">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+      <button type="submit" class="btn btn-primary">
+        {{ loading ? 'Guardando...' : 'Agregar Usuario' }}
+      </button>
     </div>
   </div>
 

@@ -16,11 +16,14 @@ class AdminDocenteController extends Controller
             'fechaNacimiento' => 'required|date',
             'telefono' => 'nullable|string|max:20',
             'sexo' => 'nullable|string|max:10',
-            'usuario' => 'required|string|unique:admin_docentes,usuario',
+            'usuario' => 'nullable|string|unique:admin_docentes,usuario',
             'contrasena' => 'nullable|string|min:4',
             'correo' => 'nullable|email',
             'carrera' => 'nullable|string|max:255',
         ]);
+
+        // Generar usuario si no viene
+        $usuario = $validated['usuario'] ?? strtolower(str_replace(' ', '', $validated['nombre'])) . date('dm', strtotime($validated['fechaNacimiento']));
 
         $adminDocente = AdminDocente::create([
             'rol' => $validated['rol'],
@@ -28,7 +31,7 @@ class AdminDocenteController extends Controller
             'fecha_nacimiento' => $validated['fechaNacimiento'],
             'telefono' => $validated['telefono'] ?? null,
             'sexo' => $validated['sexo'] ?? null,
-            'usuario' => $validated['usuario'],
+            'usuario' => $usuario,
             'password' => Hash::make($validated['contrasena'] ?? '1234'),
             'correo' => $validated['correo'] ?? null,
             'carrera' => $validated['carrera'] ?? null,
