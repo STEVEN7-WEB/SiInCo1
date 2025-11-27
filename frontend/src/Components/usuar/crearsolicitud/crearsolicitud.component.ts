@@ -24,7 +24,7 @@ export class CrearSolicitudComponent implements OnInit {
       sistemaOperativo: ['', Validators.required],
       titulo: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
-      mensajeError: [''],
+      mensajeError: ['', Validators.required],
       instalaRam: [false],
       instalaSsd: [false],
       mantenimiento: [false],
