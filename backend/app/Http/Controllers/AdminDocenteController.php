@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminDocenteController extends Controller
 {
+    // =====================================================
+    //  REGISTRO (ya lo tenías)
+    // =====================================================
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,5 +44,38 @@ class AdminDocenteController extends Controller
             'message' => 'Usuario guardado correctamente',
             'user' => $adminDocente
         ]);
+    }
+
+
+    // =====================================================
+    //  LOGIN (ESTE ES EL QUE TE FALTABA)
+    // =====================================================
+    public function login(Request $request)
+    {
+        $request->validate([
+            'usuario' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        // Buscar admin/docente
+        $usuario = AdminDocente::where('usuario', $request->usuario)->first();
+
+        if (!$usuario) {
+            return response()->json([
+                'message' => 'Usuario no encontrado'
+            ], 404);
+        }
+
+        // Verificar contraseña hasheada
+        if (!Hash::check($request->password, $usuario->password)) {
+            return response()->json([
+                'message' => 'Contraseña incorrecta'
+            ], 401);
+        }
+
+        return response()->json([
+            'message' => 'Login exitoso',
+            'usuario' => $usuario
+        ], 200);
     }
 }

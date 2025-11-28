@@ -30,3 +30,6 @@ Route::post('/inventario', [InventarioController::class, 'store']);
 
 //Ruta para Admin y Docente
 Route::post('/admin-docente', [AdminDocenteController::class, 'store']);
+
+// Nueva ruta para login de Admin y Docente
+Route::post('/login-admin-docente', [AdminDocenteController::class, 'login']);

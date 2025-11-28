@@ -13,10 +13,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
+
   loginForm!: FormGroup;
   selectedRole: 'usuario' | 'docente' | 'admin' = 'usuario';
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -31,6 +36,9 @@ export class InicioSesionComponent implements OnInit {
       return;
     }
 
+    // ============================================================
+    //  LOGIN DE USUARIO (SIN CAMBIOS)
+    // ============================================================
     if (this.selectedRole === 'usuario') {
       const datos = {
         numControl: this.loginForm.value.usuario,
@@ -39,46 +47,78 @@ export class InicioSesionComponent implements OnInit {
 
       this.http.post('http://127.0.0.1:8000/api/login', datos).subscribe({
         next: (res: any) => {
-          localStorage.setItem('numControl', res.usuario.numControl); // 🔹 Guardamos numControl
+          localStorage.setItem('numControl', res.usuario.numControl);
           localStorage.setItem('usuario', JSON.stringify(res.usuario));
           alert(`Bienvenido ${res.usuario.nombre} ✅`);
           this.router.navigate(['/usuar']);
         },
-        error: (err) => alert(err.error.message || 'Usuario o contraseña incorrectos ❌')
+        error: (err) =>
+          alert(err.error.message || 'Usuario o contraseña incorrectos ❌')
       });
 
       return;
     }
 
+    // ============================================================
+    //  LOGIN DE DOCENTE (NUEVO - CONEXIÓN A AdminDocente)
+    // ============================================================
     if (this.selectedRole === 'docente') {
-      const datosDocente = {
+
+      const datos = {
         usuario: this.loginForm.value.usuario,
-        contrasena: this.loginForm.value.contrasena
+        password: this.loginForm.value.contrasena
       };
 
-      this.http.post('http://127.0.0.1:8000/api/login-docente', datosDocente).subscribe({
-        next: (res: any) => {
-          localStorage.setItem('docente', JSON.stringify(res));
-          alert(`Bienvenido Docente ${res.nombre} 👨‍🏫`);
-          this.router.navigate(['/docente']);
-        },
-        error: (err) => alert(err.error.message || 'Credenciales de docente inválidas ❌')
-      });
+      this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
+        .subscribe({
+          next: (res: any) => {
+
+            // Asegurar rol
+            if (res.usuario.rol !== 'docente') {
+              alert('Este usuario no es docente ❌');
+              return;
+            }
+
+            localStorage.setItem('docente', JSON.stringify(res.usuario));
+            alert(`Bienvenido Docente ${res.usuario.nombre} 👨‍🏫`);
+            this.router.navigate(['/docente']);
+          },
+          error: (err) =>
+            alert(err.error.message || 'Credenciales de docente inválidas ❌')
+        });
 
       return;
     }
 
+    // ============================================================
+    //  LOGIN DE ADMIN (NUEVO - DESDE BASE DE DATOS)
+    // ============================================================
     if (this.selectedRole === 'admin') {
-      const adminUser = { usuario: 'admin', contrasena: '1234' };
-      if (
-        this.loginForm.value.usuario === adminUser.usuario &&
-        this.loginForm.value.contrasena === adminUser.contrasena
-      ) {
-        alert('Bienvenido Admin ✅');
-        this.router.navigate(['/admin']);
-      } else {
-        alert('Usuario o contraseña admin incorrectos ❌');
-      }
+
+      const datos = {
+        usuario: this.loginForm.value.usuario,
+        password: this.loginForm.value.contrasena
+      };
+
+      this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
+        .subscribe({
+          next: (res: any) => {
+
+            if (res.usuario.rol !== 'admin') {
+              alert('Este usuario no es administrador ❌');
+              return;
+            }
+
+            localStorage.setItem('admin', JSON.stringify(res.usuario));
+
+            alert(`Bienvenido Administrador ${res.usuario.nombre} 🛡️`);
+            this.router.navigate(['/admin']);
+          },
+          error: (err) =>
+            alert(err.error.message || 'Credenciales de administrador inválidas ❌')
+        });
+
+      return;
     }
   }
 
