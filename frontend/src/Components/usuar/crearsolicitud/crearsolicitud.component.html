@@ -1,9 +1,10 @@
 <div class="contenedor-formulario">
   <h2>Registrar Solicitud de Mantenimiento</h2>
+  <p class="aviso-obligatorio">Todos los campos con * son obligatorios</p>
 
   <form [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
 
-    <!-- FILA 1: Marca, color, SO -->
+    <!-- FILA 1: Marca, Color, Sistema Operativo -->
     <div class="fila fila-de-tres">
       <div class="campo">
         <label>Marca del equipo *</label>
@@ -54,7 +55,7 @@
       </div>
     </div>
 
-    <!-- FILA 3: Descripción + programa -->
+    <!-- FILA 3: Descripción + Programa -->
     <div class="fila">
       <div class="campo">
         <label>Descripción detallada *</label>
@@ -63,9 +64,7 @@
 
       <div class="campo">
         <label>Programa a instalar (opcional)</label>
-        <input type="text" formControlName="nombrePrograma"
-               [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
-
+        <input type="text" formControlName="nombrePrograma" [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
         <label>
           <input type="checkbox" formControlName="instalaPrograma">
           Instalar programa
@@ -73,22 +72,38 @@
       </div>
     </div>
 
-    <!-- FILA 4: OTROS CHECKBOX -->
-    <div class="fila">
-      <label><input type="checkbox" formControlName="instalaRam"> Instalar RAM</label>
-      <label><input type="checkbox" formControlName="instalaSsd"> Instalar SSD</label>
-      <label><input type="checkbox" formControlName="mantenimiento"> Mantenimiento general</label>
+    <!-- FILA 4: Otros checkbox -->
+    <div class="fila grupo-checkbox">
+      <label class="campo-checkbox"><input type="checkbox" formControlName="instalaRam"> Instalar RAM</label>
+      <label class="campo-checkbox"><input type="checkbox" formControlName="instalaSsd"> Instalar SSD</label>
+      <label class="campo-checkbox"><input type="checkbox" formControlName="mantenimiento"> Mantenimiento general</label>
     </div>
 
-    <!-- FILA 5: Confirmación -->
-    <div class="fila">
+    <!-- FILA 5: Aceptación de Términos -->
+    <div class="fila campo-contrato">
       <label>
         <input type="checkbox" formControlName="aceptaConfirmacion">
-        Acepto los términos *
+        Acepto los <span class="terminos-link" (click)="abrirModal()">términos y condiciones</span> *
       </label>
     </div>
 
     <button type="submit">Enviar Solicitud</button>
-
   </form>
+</div>
+
+<!-- MODAL TÉRMINOS -->
+<div id="modalTerminos" class="modal-fondo">
+  <div class="modal">
+    <h3>Términos y Condiciones</h3>
+    <p>
+      Al enviar esta solicitud, confirmo que la información proporcionada es verídica
+      y autorizo al área de mantenimiento a analizar, manipular y realizar pruebas
+      necesarias en mi equipo para su diagnóstico y reparación.
+    </p>
+    <p>
+      Entiendo que ciertos procedimientos pueden borrar información y que es mi
+      responsabilidad realizar un respaldo previo.
+    </p>
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
 </div>

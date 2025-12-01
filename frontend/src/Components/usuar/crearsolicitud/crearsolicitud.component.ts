@@ -11,6 +11,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrls: ['./crearsolicitud.component.css']
 })
 export class CrearSolicitudComponent implements OnInit {
+
   formularioMantenimiento!: FormGroup;
   apiUrl = 'http://127.0.0.1:8000/api/solicitud';
 
@@ -18,7 +19,7 @@ export class CrearSolicitudComponent implements OnInit {
 
   ngOnInit(): void {
     this.formularioMantenimiento = this.fb.group({
-      numControl: [localStorage.getItem('numControl'), Validators.required], // 🔹 numControl
+      numControl: [localStorage.getItem('numControl'), Validators.required],
       marca: ['', Validators.required],
       color: ['', Validators.required],
       sistemaOperativo: ['', Validators.required],
@@ -35,11 +36,8 @@ export class CrearSolicitudComponent implements OnInit {
 
     this.formularioMantenimiento.get('instalaPrograma')?.valueChanges.subscribe(valor => {
       const nombrePrograma = this.formularioMantenimiento.get('nombrePrograma');
-      if (valor) {
-        nombrePrograma?.setValidators([Validators.required]);
-      } else {
-        nombrePrograma?.clearValidators();
-      }
+      if (valor) nombrePrograma?.setValidators([Validators.required]);
+      else nombrePrograma?.clearValidators();
       nombrePrograma?.updateValueAndValidity();
     });
   }
@@ -59,5 +57,16 @@ export class CrearSolicitudComponent implements OnInit {
     } else {
       alert('⚠️ Por favor completa todos los campos requeridos');
     }
+  }
+
+  // FUNCIONES MODAL TÉRMINOS
+  abrirModal() {
+    const modal = document.getElementById('modalTerminos');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  cerrarModal() {
+    const modal = document.getElementById('modalTerminos');
+    if (modal) modal.style.display = 'none';
   }
 }
