@@ -1,0 +1,44 @@
+.perfil-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.perfil-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.item-label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.item-value {
+  font-size: 1.1em;
+  color: #ffffff;
+}
+
+.cargando-text {
+  text-align: center;
+  font-size: 1.2em;
+  color: #ffffff;
+  margin-top: 30px;
+}

@@ -1,0 +1,142 @@
+<div class="container">
+
+  <h2>Panel de Reportes</h2>
+
+  <div *ngIf="cargando" class="loading">Cargando datos...</div>
+  <div *ngIf="error" class="loading">Error al cargar datos. Revisa la consola.</div>
+
+  <div *ngIf="!cargando && !error && data">
+
+    <!-- TARJETAS -->
+    <div class="cards">
+
+      <div class="card usuarios">
+        Usuarios
+        <h3>{{ data.total_usuarios }}</h3>
+      </div>
+
+      <div class="card docentes">
+        Docentes
+        <h3>{{ data.total_docentes }}</h3>
+      </div>
+
+      <div class="card admin">
+        Administradores
+        <h3>{{ data.total_admins }}</h3>
+      </div>
+
+      <div class="card inventario">
+        Cantidad en Inventario
+        <h3>{{ data.total_inventario_items }}</h3>
+      </div>
+
+      <div class="card dinero">
+        Valor total del Inventario
+        <h3>{{ formatearPesos(data.total_inventario_valor) }}</h3>
+      </div>
+
+      <div class="card">
+        Total Solicitudes
+        <h3>{{ data.total_solicitudes }}</h3>
+      </div>
+
+      <!-- BOTÓN PARA MOSTRAR/OCULTAR MOVIMIENTOS -->
+      <div class="card boton-mov" (click)="mostrarMov = !mostrarMov">
+      Movimientos Recientes
+        <h3>{{ mostrarMov ? 'Ocultar' : 'Ver' }}</h3>
+      </div>
+
+      <div class="card">
+        <h3></h3>
+      </div> 
+
+      <div class="card pendiente">
+        Pendientes
+        <h3>{{ data.solicitudes_pendientes }}</h3>
+      </div>
+
+      <div class="card proceso">
+        En Proceso
+        <h3>{{ data.solicitudes_proceso }}</h3>
+      </div>
+
+      <div class="card finalizada">
+        Finalizadas
+        <h3>{{ data.solicitudes_finalizadas }}</h3>
+      </div>
+
+      <div class="card cancelado">
+        Canceladas
+        <h3>{{ data.solicitudes_canceladas }}</h3>
+      </div>
+
+
+
+    </div>
+
+    <!-- FILTRO POR FECHA -->
+    <div *ngIf="mostrarMov" class="filtro-fecha">
+      <label for="ffecha">Filtrar por fecha:</label>
+      <input id="ffecha" type="date" (change)="filtrarPorFecha($event)">
+      <button (click)="limpiarFiltro()">Limpiar filtro</button>
+    </div>
+
+    <!-- TABLA -->
+    <div *ngIf="mostrarMov" class="tabla-container">
+      <h2>Movimientos Recientes</h2>
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Nombre / Solicitud</th>
+            <th>Estatus</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let m of data.movimientos">
+
+            <td>{{ m.tipo }}</td>
+
+            <td>
+              <ng-container *ngIf="m.tipo === 'inventario'">{{ m.nombre }}</ng-container>
+              <ng-container *ngIf="m.tipo === 'solicitud'">{{ m.solicitud }}</ng-container>
+            </td>
+
+            <td>
+              <span class="badge" [ngClass]="badgeClass(m.estado)">
+                {{ m.estado || '-' }}
+              </span>
+            </td>
+
+            <td>
+              <ng-container *ngIf="m.tipo === 'inventario'">{{ m.cantidad }}</ng-container>
+              <ng-container *ngIf="m.tipo === 'solicitud'">-</ng-container>
+            </td>
+
+            <td>
+              <ng-container *ngIf="m.tipo === 'inventario'">
+                {{ formatearPesos(m.precio) }}
+              </ng-container>
+              <ng-container *ngIf="m.tipo === 'solicitud'">-</ng-container>
+            </td>
+
+            <td>{{ m.fecha }}</td>
+            <td>{{ m.usuario }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="(!data.movimientos || data.movimientos.length === 0)" class="sin-mov">
+        No hay movimientos para la fecha seleccionada.
+      </div>
+
+    </div>
+
+  </div>
+</div>

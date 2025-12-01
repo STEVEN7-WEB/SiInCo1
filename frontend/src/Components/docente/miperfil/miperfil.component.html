@@ -1,0 +1,41 @@
+<div class="perfil-container">
+  <h2 class="title">Perfil del Docente</h2>
+
+  <div *ngIf="docente && docente.id; else cargando" class="perfil-grid">
+    
+    <div class="perfil-item">
+      <p class="item-label">Nombre completo</p>
+      <p class="item-value">{{ docente.nombre }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Usuario</p>
+      <p class="item-value">{{ docente.usuario }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Correo</p>
+      <p class="item-value">{{ docente.correo || 'Sin registrar' }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Teléfono</p>
+      <p class="item-value">{{ docente.telefono || 'Sin registrar' }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Carrera</p>
+      <p class="item-value">{{ docente.carrera || 'Sin aplicar' }}</p>
+    </div>
+
+    <div class="perfil-item">
+      <p class="item-label">Rol</p>
+      <p class="item-value">{{ docente.rol }}</p>
+    </div>
+
+  </div>
+
+  <ng-template #cargando>
+    <p class="cargando-text">Cargando perfil del docente...</p>
+  </ng-template>
+</div>

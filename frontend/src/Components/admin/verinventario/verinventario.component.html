@@ -1,0 +1,37 @@
+<div class="contenedor">
+  <h2 class="titulo">Inventario</h2>
+
+  <div *ngIf="cargando" class="cargando">
+    Cargando inventario...
+  </div>
+
+  <table *ngIf="!cargando && inventario.length > 0" class="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of inventario" [ngClass]="getColor(item)">
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.descripcion }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>${{ item.precio }}</td>
+        <td>
+          <span *ngIf="item.cantidad <= 2">🛑 Muy bajo</span>
+          <span *ngIf="item.cantidad > 2 && item.cantidad <= 5">⚠ Bajo</span>
+          <span *ngIf="item.cantidad > 5">✅ Suficiente</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!cargando && inventario.length === 0" class="no-datos">
+    No hay inventario registrado.
+  </div>
+</div>

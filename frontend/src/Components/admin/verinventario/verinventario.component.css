@@ -1,0 +1,80 @@
+.contenedor {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.titulo {
+  text-align: center;
+  color: #000000;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Tabla estilo Zebra */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+/* Encabezado */
+th {
+  background: #000000;
+  padding: 14px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+/* Celdas */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #686868;
+}
+
+/* Zebra */
+tbody tr:nth-child(even) {
+  background: #000000;
+}
+
+tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+/* Hover */
+tbody tr:hover {
+  background: #eaeaea;
+  transition: 0.15s;
+}
+
+/* Estados */
+.rojo {
+  color: #d50000;
+  font-weight: bold;
+}
+
+.amarillo {
+  color: #f9a825;
+  font-weight: bold;
+}
+
+.verde {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+/* Textos */
+.cargando, .no-datos {
+  text-align: center;
+  margin-top: 20px;
+  color: #444444;
+  font-size: 1.3rem;
+  font-weight: 600;
+}

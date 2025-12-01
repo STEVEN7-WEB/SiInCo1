@@ -62,33 +62,36 @@ export class InicioSesionComponent implements OnInit {
     // ============================================================
     //  LOGIN DE DOCENTE (NUEVO - CONEXIÓN A AdminDocente)
     // ============================================================
-    if (this.selectedRole === 'docente') {
+if (this.selectedRole === 'docente') {
 
-      const datos = {
-        usuario: this.loginForm.value.usuario,
-        password: this.loginForm.value.contrasena
-      };
+  const datos = {
+    usuario: this.loginForm.value.usuario,
+    password: this.loginForm.value.contrasena
+  };
 
-      this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
-        .subscribe({
-          next: (res: any) => {
+  this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
+    .subscribe({
+      next: (res: any) => {
 
-            // Asegurar rol
-            if (res.usuario.rol !== 'docente') {
-              alert('Este usuario no es docente ❌');
-              return;
-            }
+        if (res.usuario.rol !== 'docente') {
+          alert('Este usuario no es docente ❌');
+          return;
+        }
 
-            localStorage.setItem('docente', JSON.stringify(res.usuario));
-            alert(`Bienvenido Docente ${res.usuario.nombre} 👨‍🏫`);
-            this.router.navigate(['/docente']);
-          },
-          error: (err) =>
-            alert(err.error.message || 'Credenciales de docente inválidas ❌')
-        });
+        // Guardar ID del docente para solicitudes
+        localStorage.setItem('user_id', res.usuario.id);
+        localStorage.setItem('docente', JSON.stringify(res.usuario));
 
-      return;
-    }
+        alert(`Bienvenido Docente ${res.usuario.nombre} 👨‍🏫`);
+        this.router.navigate(['/docente']);
+      },
+      error: (err) =>
+        alert(err.error.message || 'Credenciales de docente inválidas ❌')
+    });
+
+  return;
+}
+
 
     // ============================================================
     //  LOGIN DE ADMIN (NUEVO - DESDE BASE DE DATOS)

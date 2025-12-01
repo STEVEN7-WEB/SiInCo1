@@ -14,7 +14,7 @@ import { OlvideContrasenaComponent } from './Components/olvide-contrasena/olvide
 // --- Componentes Layout ---
 import { VentanaUsuarioComponent } from './Components/ventanausuario/ventanausuario.component';
 import { VentanaadminComponent } from './Components/ventanaadmin/ventanaadmin.component';
-import { Ventanadocente } from './Components/ventanadocente/ventanadocente.component';
+import { VentanaDocente } from './Components/ventanadocente/ventanadocente.component';
 
 // --- Componentes Hijos Usuario ---
 import { CrearSolicitudComponent } from './Components/usuar/crearsolicitud/crearsolicitud.component';
@@ -23,11 +23,21 @@ import { VersolicitudComponent } from './Components/usuar/versolicitud/versolici
 import { MiperfilComponent } from './Components/usuar/miperfil/miperfil.component';
 import { AyudaComponent } from './Components/usuar/ayuda/ayuda.component';
 import { VideoComponent } from './Components/usuar/video/video.component';
+// ---Componentes Hijos Docente ---
+import { BienvenidaDocenteComponent as BienvenidaDocenteComponent } from './Components/docente/bienvenida/bienvenida.component';
+import { CrearSolicituDocentedComponent } from './Components/docente/crearsolicitud/crearsolicitud.component';
+import { VersolicitudDocenteComponent } from './Components/docente/versolicitud/versolicitud.component';
+import { MiperfilDocenteComponent } from './Components/docente/miperfil/miperfil.component';
+import { AyudaDocenteComponent } from './Components/docente/ayuda/ayuda.component';
+import { VideoDocenteComponent } from './Components/docente/video/video.component';
 // --- Componentes Hijos Admin ---
 import { BienvenidaComponent as BienvenidaAdminComponent } from './Components/admin/bienvenida/bienvenida.component';
 import { RevisarComponent } from './Components/admin/revisar/revisar.component';
 import { CargainventarioComponent } from './Components/admin/cargainventario/cargainventario.component';
 import { CargarusuariosComponent } from './Components/admin/cargarusuarios/cargarusuarios.component';
+import { VerinventarioComponent } from './Components/admin/verinventario/verinventario.component';
+import { VerreportesComponent } from './Components/admin/verreportes/verreportes.component';
+import { Manualdeayuda } from './Components/admin/manualdeayuda/manualdeayuda.component'; 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
@@ -55,12 +65,15 @@ bootstrapApplication(AppComponent, {
       // --- RUTA DOCENTE ---
       {
         path: 'docente',
-        component: Ventanadocente,
+        component: VentanaDocente,
         children: [
-          { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
-          { path: 'bienvenida', component: BienvenidaComponent },
-          { path: 'crear-solicitud', component: CrearSolicitudComponent },
-          { path: 'mis-solicitudes', component: VersolicitudComponent },
+          { path: '', redirectTo: 'bienvenidadocente', pathMatch: 'full' },
+          { path: 'bienvenidadocente', component: BienvenidaDocenteComponent },
+          { path: 'crear-solicitud', component: CrearSolicituDocentedComponent },
+          { path: 'mis-solicitudes', component: VersolicitudDocenteComponent },
+          { path: 'mi-perfil', component: MiperfilDocenteComponent },
+          { path: 'ayuda', component: AyudaDocenteComponent },
+          { path: 'configuracion', component: VideoDocenteComponent },
         ]
       },
 
@@ -74,6 +87,9 @@ bootstrapApplication(AppComponent, {
           { path: 'revisar-solicitudes', component: RevisarComponent },
           { path: 'cargar-inventario', component: CargainventarioComponent },
           { path: 'cargar-usuarios', component: CargarusuariosComponent },
+          { path: 'revisar-inventario', component: VerinventarioComponent},
+          { path: 'reportes', component: VerreportesComponent},
+          { path: 'ayuda', component: Manualdeayuda}
         ]
       },
     ]),

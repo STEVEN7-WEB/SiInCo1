@@ -1,0 +1,69 @@
+.container {
+  width: 95%;
+  margin: auto;
+  color: white;
+}
+
+/* TARJETAS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  padding: 1px;
+  background: #222;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 0px 5px #0008;
+  cursor: default;
+}
+
+/* BOTÓN DE MOVIMIENTOS */
+.boton-mov {
+  background: #222 !important;
+  cursor: pointer;
+}
+
+/* BADGES */
+.pendiente { background-color: #ffae00 !important; color: #111 !important; }
+.proceso { background-color: #0095ff !important; color: #fff !important; }
+.finalizada { background-color: #00c853 !important; color: #fff !important; }
+.cancelado { background-color: #d32f2f !important; color: #fff !important; }
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* TABLA */
+.tabla-container {
+  background: #1d1d1d;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+}
+
+.sin-mov {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+}

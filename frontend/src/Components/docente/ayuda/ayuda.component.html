@@ -1,0 +1,43 @@
+<div class="contenedor-formulario">
+  <h2>Centro de Ayuda</h2>
+  <p class="aviso-obligatorio">Selecciona la sección que deseas consultar.</p>
+
+  <!-- Botones para cambiar vista -->
+  <div class="fila" style="justify-content:center; gap:10px;">
+    <button (click)="vista = 'contactos'" [disabled]="vista === 'contactos'">Contactos</button>
+    <button (click)="vista = 'mapa'" [disabled]="vista === 'mapa'">Mapa</button>
+  </div>
+
+  <!-- Sección Contactos -->
+  <div *ngIf="vista === 'contactos'" class="tabla-contenedor">
+    <table class="tabla-solicitudes">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contacto of contactos">
+          <td>{{ contacto.nombre }}</td>
+          <td>{{ contacto.telefono }}</td>
+          <td>{{ contacto.correo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Sección Mapa -->
+  <div *ngIf="vista === 'mapa'" class="mapa-contenedor">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3698.7473379094326!2d-99.0358119!3d22.02099!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d60d45cc4cf729%3A0xca99477921b9215b!2sInstituto%20Tecnol%C3%B3gico%20de%20Ciudad%20Valles!5e0!3m2!1ses-419!2smx!4v1762743535523!5m2!1ses-419!2smx"
+      width="100%"
+      height="280"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>

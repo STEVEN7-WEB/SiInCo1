@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Solicitud extends Model
 {
     use HasFactory;
-    
-  protected $table = 'solicitudes';
+
+    protected $table = 'solicitudes';
 
     protected $fillable = [
         'user_id',
@@ -25,6 +25,12 @@ class Solicitud extends Model
         'instalaPrograma',
         'nombrePrograma',
         'aceptaConfirmacion',
-        'estatus' 
+        'estatus'
     ];
+
+    // 🔥 ESTA ES LA RELACIÓN QUE FALTABA
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
