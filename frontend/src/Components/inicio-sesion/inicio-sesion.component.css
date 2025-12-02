@@ -7,6 +7,7 @@
   display: flex;
   width: 100%;
   min-height: 97.5vh;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 /* PANEL IZQUIERDO */
@@ -23,12 +24,20 @@
   padding-top: 40px;
 }
 
-.logo-box img {
+/* LOGO COMO FONDO */
+.logo-box {
   width: 150px;
-  border-radius: 50%;
+  height: 150px;
   margin-bottom: 20px;
+  border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #000;
+
+  background-image: url('./Imagenes/logo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* PANEL DERECHO */
@@ -184,7 +193,6 @@
   color: rgb(0, 0, 0);
   box-shadow: 0 0 18px rgba(0,0,0,.4);
   animation: scaleUp .25s ease-in-out;
-  
   border-left: 6px solid;
 }
 

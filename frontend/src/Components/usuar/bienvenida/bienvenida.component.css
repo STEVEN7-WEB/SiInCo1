@@ -1,0 +1,31 @@
+.gif-container {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+
+  background-image: url('./Imagenes/hello-hi.gif');
+  background-size: cover;
+  background-position: center;
+}
+
+.gif-bienvenida {
+    width: 180px;
+    border-radius: 10px;
+}
+
+/* Texto */
+.titulo-bienvenida {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.texto-bienvenida {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.texto-indicacion {
+    font-size: 1rem;
+    margin-top: 20px;
+}

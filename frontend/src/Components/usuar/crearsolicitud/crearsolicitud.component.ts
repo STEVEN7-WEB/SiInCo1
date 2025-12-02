@@ -59,7 +59,6 @@ export class CrearSolicitudComponent implements OnInit {
     }
   }
 
-  // FUNCIONES MODAL TÉRMINOS
   abrirModal() {
     const modal = document.getElementById('modalTerminos');
     if (modal) modal.style.display = 'flex';
