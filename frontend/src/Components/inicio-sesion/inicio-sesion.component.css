@@ -40,10 +40,15 @@
   background-repeat: no-repeat;
 }
 
-/* PANEL DERECHO */
+/* PANEL DERECHO — ANIMACIÓN DE DEGRADADO */
 .login-right {
   width: 70%;
-  background: #121212;
+  /*background: linear-gradient(135deg, #3a3a3a, #121212, #ffffff, #3a3a3a, #121212);*/
+
+  background-color: #333;
+  background-size: 400% 400%;
+  animation: both 10s ease-in-out infinite gradientFlow;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +58,13 @@
 
 .login-right form {
   width: 80%;
+}
+
+/* Keyframes para el fondo animado */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* SELECTOR DE ROL */
