@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule, NgIf, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -8,20 +8,19 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-inicio-sesion',
   standalone: true,
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './inicio-sesion.component.html',
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
 
-
   loginForm!: FormGroup;
   selectedRole: 'usuario' | 'docente' | 'admin' = 'usuario';
+
+  showModal: boolean = false;
+  modalTitulo: string = "";
+  modalMensaje: string = "";
+  modalTipo: string = ""; // modal-success | modal-error
 
   constructor(
     private fb: FormBuilder,
@@ -36,15 +35,22 @@ export class InicioSesionComponent implements OnInit {
     });
   }
 
+  mostrarModal(tipo: 'success' | 'error', titulo: string, mensaje: string) {
+    this.modalTipo = tipo === 'success' ? 'modal-success' : 'modal-error';
+    this.modalTitulo = titulo;
+    this.modalMensaje = mensaje;
+    this.showModal = true;
+
+    setTimeout(() => this.showModal = false, 2500);
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      alert('Por favor llena todos los campos ⚠️');
+      this.mostrarModal('error', 'Campos vacíos', 'Por favor llena todos los campos');
       return;
     }
 
-    // ============================================================
-    //  LOGIN DE USUARIO (SIN CAMBIOS)
-    // ============================================================
+    /* ========== LOGIN USUARIO ========== */
     if (this.selectedRole === 'usuario') {
       const datos = {
         numControl: this.loginForm.value.usuario,
@@ -53,57 +59,52 @@ export class InicioSesionComponent implements OnInit {
 
       this.http.post('http://127.0.0.1:8000/api/login', datos).subscribe({
         next: (res: any) => {
+
           localStorage.setItem('numControl', res.usuario.numControl);
           localStorage.setItem('usuario', JSON.stringify(res.usuario));
-          alert(`Bienvenido ${res.usuario.nombre} ✅`);
-          this.router.navigate(['/usuar']);
+
+          this.mostrarModal('success', '✔ Sesión iniciada', `Bienvenido ${res.usuario.nombre}`);
+
+          setTimeout(() => this.router.navigate(['/usuar']), 2500);
         },
         error: (err) =>
-          alert(err.error.message || 'Usuario o contraseña incorrectos ❌')
+          this.mostrarModal('error', 'Error', err.error.message || 'Usuario o contraseña incorrectos ❌')
       });
 
       return;
     }
 
-    // ============================================================
-    //  LOGIN DE DOCENTE (NUEVO - CONEXIÓN A AdminDocente)
-    // ============================================================
-if (this.selectedRole === 'docente') {
+    /* ========== LOGIN DOCENTE ========== */
+    if (this.selectedRole === 'docente') {
+      const datos = {
+        usuario: this.loginForm.value.usuario,
+        password: this.loginForm.value.contrasena
+      };
 
-  const datos = {
-    usuario: this.loginForm.value.usuario,
-    password: this.loginForm.value.contrasena
-  };
+      this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
+        .subscribe({
+          next: (res: any) => {
 
-  this.http.post('http://127.0.0.1:8000/api/login-admin-docente', datos)
-    .subscribe({
-      next: (res: any) => {
+            if (res.usuario.rol !== 'docente') {
+              this.mostrarModal('error', 'Acceso denegado', 'Este usuario no es docente');
+              return;
+            }
 
-        if (res.usuario.rol !== 'docente') {
-          alert('Este usuario no es docente ❌');
-          return;
-        }
+            localStorage.setItem('docente', JSON.stringify(res.usuario));
 
-        // Guardar ID del docente para solicitudes
-        localStorage.setItem('user_id', res.usuario.id);
-        localStorage.setItem('docente', JSON.stringify(res.usuario));
+            this.mostrarModal('success', '✔ Bienvenido Docente', res.usuario.nombre);
 
-        alert(`Bienvenido Docente ${res.usuario.nombre} 👨‍🏫`);
-        this.router.navigate(['/docente']);
-      },
-      error: (err) =>
-        alert(err.error.message || 'Credenciales de docente inválidas ❌')
-    });
+            setTimeout(() => this.router.navigate(['/docente']), 2500);
+          },
+          error: (err) =>
+            this.mostrarModal('error', 'Error', err.error.message || 'Credenciales incorrectas ❌')
+        });
 
-  return;
-}
+      return;
+    }
 
-
-    // ============================================================
-    //  LOGIN DE ADMIN (NUEVO - DESDE BASE DE DATOS)
-    // ============================================================
+    /* ========== LOGIN ADMIN ========== */
     if (this.selectedRole === 'admin') {
-
       const datos = {
         usuario: this.loginForm.value.usuario,
         password: this.loginForm.value.contrasena
@@ -114,17 +115,18 @@ if (this.selectedRole === 'docente') {
           next: (res: any) => {
 
             if (res.usuario.rol !== 'admin') {
-              alert('Este usuario no es administrador ❌');
+              this.mostrarModal('error', 'Acceso denegado', 'Este usuario no es administrador');
               return;
             }
 
             localStorage.setItem('admin', JSON.stringify(res.usuario));
 
-            alert(`Bienvenido Administrador ${res.usuario.nombre} 🛡️`);
-            this.router.navigate(['/admin']);
+            this.mostrarModal('success', '✔ Bienvenido Administrador', res.usuario.nombre);
+
+            setTimeout(() => this.router.navigate(['/admin']), 2500);
           },
           error: (err) =>
-            alert(err.error.message || 'Credenciales de administrador inválidas ❌')
+            this.mostrarModal('error', 'Error', err.error.message || 'Credenciales incorrectas ❌')
         });
 
       return;

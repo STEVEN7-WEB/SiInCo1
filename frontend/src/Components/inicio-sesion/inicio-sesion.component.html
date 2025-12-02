@@ -1,9 +1,8 @@
-<div class="login-wrapper"> 
+<div class="login-wrapper">
 
   <div class="login-left">
     <div class="logo-box">
-      <img src="https://copilot.microsoft.com/th/id/BCO.e657d4e2-a373-4b52-bec3-5741c8275507.png" 
-           alt="Logo" class="logo-image">
+      <img src="https://copilot.microsoft.com/th/id/BCO.e657d4e2-a373-4b52-bec3-5741c8275507.png">
     </div>
   </div>
 
@@ -12,60 +11,55 @@
     <div class="role-selector">
       <button type="button" class="role-btn"
               [class.active]="selectedRole === 'usuario'"
-              (click)="seleccionarRol('usuario')">
-        USUARIO
-      </button>
+              (click)="seleccionarRol('usuario')">USUARIO</button>
 
-      <!-- 👉 NUEVO BOTÓN DOCENTE -->
       <button type="button" class="role-btn"
               [class.active]="selectedRole === 'docente'"
-              (click)="seleccionarRol('docente')">
-        DOCENTE
-      </button>
+              (click)="seleccionarRol('docente')">DOCENTE</button>
 
-      <button type="button" class="role-btn" 
+      <button type="button" class="role-btn"
               [class.active]="selectedRole === 'admin'"
-              (click)="seleccionarRol('admin')">
-        ADMIN
-      </button>
+              (click)="seleccionarRol('admin')">ADMIN</button>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <label class="input-label">
-        {{ selectedRole === 'usuario' ? 'Num. Control' :
-           selectedRole === 'docente' ? 'Usuario Docente' : 'Usuario Admin' }}
+        {{ selectedRole === 'usuario' ? 'Num. Control'
+           : selectedRole === 'docente' ? 'Usuario Docente'
+           : 'Usuario Admin' }}
       </label>
 
       <input type="text" class="input-field" formControlName="usuario"
              [placeholder]="
-               selectedRole === 'usuario' ? 'Número de control...' :
-               selectedRole === 'docente' ? 'Usuario docente...' :
-               'Usuario admin...'
+               selectedRole === 'usuario' ? 'Número de control...'
+               : selectedRole === 'docente' ? 'Usuario docente...'
+               : 'Usuario admin...'
              ">
 
       <label class="input-label">Contraseña</label>
       <input type="password" class="input-field" formControlName="contrasena" placeholder="Password...">
 
-      <!-- OLVIDÉ CONTRASEÑA SOLO PARA USUARIO -->
-      <button *ngIf="selectedRole === 'usuario'" type="button"
-              class="btn-link"
-              (click)="olvideContrasena()">
-        OLVIDÉ MI CONTRASEÑA
-      </button>
+      <button *ngIf="selectedRole === 'usuario'" type="button" class="btn-link"
+              (click)="olvideContrasena()">OLVIDÉ MI CONTRASEÑA</button>
 
       <div class="buttons">
         <button type="submit" class="btn btn-primary">ACCEDER</button>
 
-        <!-- CREAR CUENTA SOLO PARA USUARIO -->
         <button *ngIf="selectedRole === 'usuario'" type="button"
                 class="btn btn-secondary"
-                (click)="irACrearCuenta()">
-          CREAR CUENTA
-        </button>
+                (click)="irACrearCuenta()">CREAR CUENTA</button>
       </div>
 
     </form>
 
+  </div>
+</div>
+
+<!-- VENTANA FLOTANTE -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content" [ngClass]="modalTipo">
+    <h3>{{ modalTitulo }}</h3>
+    <p>{{ modalMensaje }}</p>
   </div>
 </div>

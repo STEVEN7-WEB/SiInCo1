@@ -1,16 +1,18 @@
 * {
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
+/* LAYOUT GENERAL */
 .login-wrapper {
   display: flex;
   width: 100%;
   min-height: 97.5vh;
 }
 
+/* PANEL IZQUIERDO */
 .login-left {
   width: 30%;
-  background-image: url("./Imagenes/fondo.jpg"); 
+  background-image: url("./Imagenes/fondo.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -18,36 +20,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 40px; 
+  padding-top: 40px;
 }
 
 .logo-box img {
   width: 150px;
-  border-radius: 50%; 
+  border-radius: 50%;
   margin-bottom: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.5); 
+  border: 3px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* PANEL DERECHO */
 .login-right {
   width: 70%;
-  background: #121212; 
+  background: #121212;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 60px;
-  align-items: center; 
+  align-items: center;
 }
 
 .login-right form {
-  width: 80%; 
+  width: 80%;
 }
 
+/* SELECTOR DE ROL */
 .role-selector {
   display: flex;
   margin-bottom: 30px;
   border-radius: 8px;
-  overflow: hidden; 
+  overflow: hidden;
   border: 1px solid #444;
   width: 80%;
 }
@@ -69,17 +73,17 @@
   color: #121212;
 }
 
-
+/* INPUTS */
 .input-label {
-  display: block; 
-  margin-bottom: 8px; 
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
-  color: #eee; 
+  color: #eee;
   font-size: 14px;
 }
 
 .input-field {
-  width: 100%; 
+  width: 100%;
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid #444;
@@ -100,6 +104,7 @@
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+/* BOTONES */
 .btn {
   flex: 1;
   padding: 15px;
@@ -109,8 +114,7 @@
   border: none;
   font-weight: bold;
   text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  transition: 0.3s;
 }
 
 .btn-primary {
@@ -143,6 +147,7 @@
   text-align: right;
   font-size: 14px;
 }
+
 .btn-link:hover {
   color: #fff;
 }
@@ -151,4 +156,72 @@
   display: flex;
   gap: 15px;
   width: 100%;
+}
+
+/* ======================= */
+/*     VENTANA FLOTANTE    */
+/* ======================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(92, 92, 92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn .25s ease-in-out;
+}
+
+.modal-content {
+  background: #000000;
+  padding: 35px 40px;
+  border-radius: 18px;
+  width: 360px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 18px rgba(0,0,0,.4);
+  animation: scaleUp .25s ease-in-out;
+  
+  border-left: 6px solid;
+}
+
+.modal-success {
+  border-color: #28e04f;
+}
+
+.modal-error {
+  border-color: #ff3b3b;
+}
+
+.modal-content h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal-success h3 {
+  color: #28e04f;
+}
+
+.modal-error h3 {
+  color: #ff3b3b;
+}
+
+.modal-content p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #ddd;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }
