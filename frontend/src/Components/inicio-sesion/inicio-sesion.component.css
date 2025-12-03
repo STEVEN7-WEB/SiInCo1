@@ -43,9 +43,7 @@
 /* PANEL DERECHO — ANIMACIÓN DE DEGRADADO */
 .login-right {
   width: 70%;
-  /*background: linear-gradient(135deg, #3a3a3a, #121212, #ffffff, #3a3a3a, #121212);*/
-
-  background-color: #333;
+  background: linear-gradient(135deg, #3a3a3a, #121212, #ffffff, #3a3a3a, #121212);
   background-size: 400% 400%;
   animation: both 10s ease-in-out infinite gradientFlow;
 
