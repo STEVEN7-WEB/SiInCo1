@@ -21,20 +21,7 @@
   padding-top: 40px;
 }
 
-.logo-box {
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  background-color: #000;
 
-  background-image: url('./Imagenes/logo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 .register-right {
   width: 70%;
