@@ -35,11 +35,8 @@ export class CrearSolicituDocentedComponent implements OnInit {
 
     this.formularioMantenimiento.get('instalaPrograma')?.valueChanges.subscribe(valor => {
       const nombrePrograma = this.formularioMantenimiento.get('nombrePrograma');
-      if (valor) {
-        nombrePrograma?.setValidators([Validators.required]);
-      } else {
-        nombrePrograma?.clearValidators();
-      }
+      if (valor) nombrePrograma?.setValidators([Validators.required]);
+      else nombrePrograma?.clearValidators();
       nombrePrograma?.updateValueAndValidity();
     });
   }
@@ -59,5 +56,15 @@ export class CrearSolicituDocentedComponent implements OnInit {
     } else {
       alert('⚠️ Por favor completa todos los campos requeridos');
     }
+  }
+
+  abrirModal(): void {
+    const modal = document.getElementById('modalTerminos');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  cerrarModal(): void {
+    const modal = document.getElementById('modalTerminos');
+    if (modal) modal.style.display = 'none';
   }
 }

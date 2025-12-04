@@ -1,172 +1,224 @@
+* {
+  box-sizing: border-box;
+}
+
+/* --- FORMULARIO CENTRAL --- */
 :host {
-  display: block;
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #121212;
 }
 
-.contenedor-formulario {
-  max-width: 600px;
-  height: auto;
-  margin: 0 auto; 
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 1px 15px 1px 15px; 
+form {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(0,0,0,0.4);
+  padding: 35px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: fadeIn 0.7s ease-out;
 }
 
-.contenedor-formulario h2 {
+h2 {
   text-align: center;
-  margin-top: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #ffffff;
   margin-bottom: 10px;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #E0E0E0;
 }
 
-.contenedor-formulario .aviso-obligatorio {
+.aviso-obligatorio {
   text-align: center;
   font-size: 0.85rem;
-  color: #aaa;
-  margin-top: 0;
-  margin-bottom: 25px;
-}
-
-.contenedor-formulario .fila {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  color: #b8b8b8;
   margin-bottom: 15px;
 }
 
-.contenedor-formulario .campo {
-  flex: 1;
-  min-width: 250px; 
+/* --- FILAS Y CAMPOS --- */
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.campo {
+  flex: 1 1 200px;
+  max-width: 250px;
   display: flex;
   flex-direction: column;
 }
 
-.contenedor-formulario label {
+label {
   margin-bottom: 5px;
   font-weight: 600;
-  font-size: 0.9rem;
-  color: #C5C5C5;
+  color: #ffffff;
 }
 
-.contenedor-formulario .obligatorio {
-  color: #E74C3C;
-  font-weight: 700;
-  margin-left: 3px;
-}
-
-.contenedor-formulario input[type="text"],
-.contenedor-formulario textarea,
-.contenedor-formulario select { 
+input[type="text"],
+textarea,
+select {
   width: 100%;
-  padding: 9px 12px;
-  background-color: #2B2B2B;
-  color: #E0E0E0;
-  border: 1px solid #666;
-  border-radius: 6px;
-  font-size: 0.9rem; 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-  box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: #313131;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-.contenedor-formulario textarea {
+input::placeholder,
+textarea::placeholder {
+  color: #9d9d9d;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background: #3b3b3b;
+  border-color: #4da3ff;
+  box-shadow: 0 0 12px rgba(77,163,255,0.5);
+}
+
+textarea {
   min-height: 60px;
   resize: vertical;
 }
 
-.contenedor-formulario input[type="text"]:focus,
-.contenedor-formulario textarea:focus,
-.contenedor-formulario select:focus { 
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-  outline: none;
-}
-
-.contenedor-formulario .campo.ancho-total,
-.contenedor-formulario .grupo-checkbox.ancho-total,
-.contenedor-formulario .campo-contrato.ancho-total {
-  flex-basis: 100%; 
-  min-width: 100%;
-}
-
-.contenedor-formulario .grupo-checkbox {
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; 
-}
-
-.contenedor-formulario .campo-checkbox {
+/* --- CHECKBOXES --- */
+.campo-checkbox,
+.campo-contrato {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
-.contenedor-formulario .campo-checkbox label {
-  margin-bottom: 0;
-  font-weight: normal;
-  color: #C5C5C0;
-  margin-left: 8px;
+.grupo-checkbox {
+  flex-wrap: wrap;
 }
 
-.contenedor-formulario .campo-contrato {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 10px;
+.grupo-checkbox label {
+  flex: 1 1 150px;
 }
 
-.contenedor-formulario .campo-contrato input[type="checkbox"] {
-  margin-top: 2px;
-  flex-shrink: 0;
-  accent-color: #007bff;
-  width: 15px;
-  height: 15px;
-}
-
-.contenedor-formulario .campo-contrato label {
-  margin-left: 10px;
-  font-weight: normal;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.contenedor-formulario .campo-contrato label a {
-  color: #0099ff;
-  text-decoration: underline;
-  font-weight: 600;
-}
-
-.contenedor-formulario .campo-contrato label a:hover {
-  color: #33afff;
-}
-
-.contenedor-formulario button[type="submit"] {
+/* --- BOTÓN SUBMIT --- */
+button[type="submit"] {
   display: block;
   width: 50%;
-  margin: 25px auto 0 auto;
-  padding: 10px 0;
-  background-color: #007bff;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
+  padding: 12px 0;
+  background: #4da3ff;
   color: #fff;
-  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.contenedor-formulario button[type="submit"]:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: translateY(-1px);
+button[type="submit"]:hover {
+  background: #1e7fe6;
+  transform: translateY(-2px);
 }
 
-.contenedor-formulario button[type="submit"]:disabled {
-  background-color: #a0c4ff;
-  cursor: not-allowed;
+/* --- ENLACE DE TÉRMINOS --- */
+.terminos-link {
+  background: none;
+  border: none;
+  color: #4da3ff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
 }
 
-.contenedor-formulario .fila-de-tres .campo {
-  min-width: 0; 
-  flex-basis: 30%;
+/* --- MODAL --- */
+.modal-fondo {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #1c1c1c;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 0 22px rgba(0,0,0,0.6);
+  color: #fff;
+  text-align: justify;
+  position: relative;
+  animation: scaleUp 0.25s ease-in-out;
+}
+
+.modal h3 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.modal p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.modal button.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4da3ff;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal button.cerrar:hover {
+  background: #1e7fe6;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  form {
+    padding: 25px 20px;
+  }
+
+  .fila {
+    flex-direction: column;
+  }
+
+  button[type="submit"] {
+    width: 70%;
+  }
 }

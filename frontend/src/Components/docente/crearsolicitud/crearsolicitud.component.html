@@ -1,94 +1,109 @@
-<div class="contenedor-formulario">
+<form [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
+
   <h2>Registrar Solicitud de Mantenimiento</h2>
+  <p class="aviso-obligatorio">Todos los campos con * son obligatorios</p>
 
-  <form [formGroup]="formularioMantenimiento" (ngSubmit)="enviarSolicitud()">
-
-    <!-- FILA 1: Marca, color, SO -->
-    <div class="fila fila-de-tres">
-      <div class="campo">
-        <label>Marca del equipo *</label>
-        <select formControlName="marca">
-          <option value="" disabled selected>Selecciona una marca...</option>
-          <option value="Asus">Asus</option>
-          <option value="Lenovo">Lenovo</option>
-          <option value="HP">HP</option>
-          <option value="Dell">Dell</option>
-        </select>
-      </div>
-
-      <div class="campo">
-        <label>Color *</label>
-        <select formControlName="color">
-          <option value="" disabled selected>Selecciona un color...</option>
-          <option value="Gris">Gris</option>
-          <option value="Negro">Negro</option>
-          <option value="Blanco">Blanco</option>
-          <option value="Rojo">Rojo</option>
-          <option value="Azul">Azul</option>
-        </select>
-      </div>
-
-      <div class="campo">
-        <label>Sistema Operativo *</label>
-        <select formControlName="sistemaOperativo">
-          <option value="" disabled selected>Selecciona un SO...</option>
-          <option value="Windows 11">Windows 11</option>
-          <option value="Windows 10">Windows 10</option>
-          <option value="macOS">macOS</option>
-          <option value="Linux">Linux</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
+  <!-- FILA 1: Marca, Color, SO -->
+  <div class="fila fila-de-tres">
+    <div class="campo">
+      <label>Marca del equipo *</label>
+      <select formControlName="marca">
+        <option value="" disabled selected>Selecciona una marca...</option>
+        <option value="Asus">Asus</option>
+        <option value="Lenovo">Lenovo</option>
+        <option value="HP">HP</option>
+        <option value="Dell">Dell</option>
+      </select>
     </div>
 
-    <!-- FILA 2: Título y mensaje de error -->
-    <div class="fila">
-      <div class="campo">
-        <label>Título breve del problema *</label>
-        <input type="text" formControlName="titulo">
-      </div>
-
-      <div class="campo">
-        <label>Detalles del equipo *</label>
-        <input type="text" formControlName="mensajeError">
-      </div>
+    <div class="campo">
+      <label>Color *</label>
+      <select formControlName="color">
+        <option value="" disabled selected>Selecciona un color...</option>
+        <option value="Gris">Gris</option>
+        <option value="Negro">Negro</option>
+        <option value="Blanco">Blanco</option>
+        <option value="Rojo">Rojo</option>
+        <option value="Azul">Azul</option>
+      </select>
     </div>
 
-    <!-- FILA 3: Descripción + programa -->
-    <div class="fila">
-      <div class="campo">
-        <label>Descripción detallada *</label>
-        <textarea formControlName="descripcion"></textarea>
-      </div>
+    <div class="campo">
+      <label>Sistema Operativo *</label>
+      <select formControlName="sistemaOperativo">
+        <option value="" disabled selected>Selecciona un SO...</option>
+        <option value="Windows 11">Windows 11</option>
+        <option value="Windows 10">Windows 10</option>
+        <option value="macOS">macOS</option>
+        <option value="Linux">Linux</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+  </div>
 
-      <div class="campo">
-        <label>Programa a instalar (opcional)</label>
-        <input type="text" formControlName="nombrePrograma"
-               [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value">
-
-        <label>
-          <input type="checkbox" formControlName="instalaPrograma">
-          Instalar programa
-        </label>
-      </div>
+  <!-- FILA 2: Título y Detalles -->
+  <div class="fila">
+    <div class="campo">
+      <label>Título breve del problema *</label>
+      <input type="text" formControlName="titulo" placeholder="Escribe un título breve">
     </div>
 
-    <!-- FILA 4: OTROS CHECKBOX -->
-    <div class="fila">
-      <label><input type="checkbox" formControlName="instalaRam"> Instalar RAM</label>
-      <label><input type="checkbox" formControlName="instalaSsd"> Instalar SSD</label>
-      <label><input type="checkbox" formControlName="mantenimiento"> Mantenimiento general</label>
+    <div class="campo">
+      <label>Detalles del equipo *</label>
+      <input type="text" formControlName="mensajeError" placeholder="Describe detalles específicos">
+    </div>
+  </div>
+
+  <!-- FILA 3: Descripción y Programa a instalar -->
+  <div class="fila">
+    <div class="campo">
+      <label>Descripción detallada *</label>
+      <textarea formControlName="descripcion" placeholder="Explica el problema con detalle"></textarea>
     </div>
 
-    <!-- FILA 5: Confirmación -->
-    <div class="fila">
-      <label>
-        <input type="checkbox" formControlName="aceptaConfirmacion">
-        Acepto los términos *
+    <div class="campo">
+      <label>Programa a instalar (opcional)</label>
+      <input type="text" formControlName="nombrePrograma" [disabled]="!formularioMantenimiento.get('instalaPrograma')?.value" placeholder="Nombre del programa">
+      <label class="campo-checkbox">
+        <input type="checkbox" formControlName="instalaPrograma">
+        Instalar programa
       </label>
     </div>
+  </div>
 
-    <button type="submit">Enviar Solicitud</button>
+  <!-- FILA 4: Checkboxes adicionales -->
+  <div class="fila grupo-checkbox">
+    <label class="campo-checkbox"><input type="checkbox" formControlName="instalaRam"> Instalar RAM</label>
+    <label class="campo-checkbox"><input type="checkbox" formControlName="instalaSsd"> Instalar SSD</label>
+    <label class="campo-checkbox"><input type="checkbox" formControlName="mantenimiento"> Mantenimiento general</label>
+  </div>
 
-  </form>
+  <!-- FILA 5: Aceptar términos -->
+  <div class="fila campo-contrato">
+    <label>
+      <input type="checkbox" formControlName="aceptaConfirmacion">
+      Acepto los 
+      <button type="button" class="terminos-link" (click)="abrirModal()">términos y condiciones</button> *
+    </label>
+  </div>
+
+  <!-- BOTÓN ENVIAR -->
+  <button type="submit">Enviar Solicitud</button>
+</form>
+
+<!-- MODAL TÉRMINOS -->
+<div id="modalTerminos" class="modal-fondo">
+  <div class="modal">
+    <button class="cerrar" (click)="cerrarModal()">X</button>
+    <h3>Términos y Condiciones</h3>
+    <p>
+      Al enviar esta solicitud, confirmo que la información proporcionada es verídica
+      y autorizo al área de mantenimiento a analizar, manipular y realizar pruebas
+      necesarias en mi equipo para su diagnóstico y reparación.
+    </p>
+    <p>
+      Entiendo que ciertos procedimientos pueden borrar información y que es mi
+      responsabilidad realizar un respaldo previo.
+    </p>
+  </div>
 </div>
