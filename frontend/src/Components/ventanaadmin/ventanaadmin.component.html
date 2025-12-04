@@ -1,8 +1,7 @@
-<div class="user-wrapper">
+<div class="admin-wrapper">
 
-  <div class="user-left">
+  <div class="admin-left">
     <div class="logo-box">
-
     </div>
 
     <nav class="menu-grid">
@@ -36,13 +35,14 @@
         <p>Ayuda</p>
       </button>
     </nav>
-          <button class="menu-item logout-btn" (click)="cerrarSesion()">
-        <span>🚪</span>
-        <p>Salir</p>
-      </button>
+
+    <button class="menu-item logout-btn" (click)="cerrarSesion()">
+      <span>🚪</span>
+      <p>Salir</p>
+    </button>
   </div>
 
-  <div class="user-right">
+  <div class="admin-right">
     <div class="content-box">
       <router-outlet></router-outlet>
     </div>

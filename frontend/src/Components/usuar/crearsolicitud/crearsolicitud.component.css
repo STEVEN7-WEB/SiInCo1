@@ -1,21 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+/* --- LAYOUT GENERAL --- */
 :host {
   display: flex;
   justify-content: center;
-  padding: 1px;
+  padding: 20px 10px; /* más espacio arriba y abajo */
   font-family: 'Segoe UI', sans-serif;
+  background: #121212;
 }
 
+/* FORMULARIO CENTRAL */
 form {
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
+  background: rgba(0,0,0,0.4);
+  padding: 35px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: fadeIn 0.7s ease-out;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 12px;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
   color: #ffffff;
+  margin-bottom: 10px;
 }
 
 .aviso-obligatorio {
@@ -25,34 +42,52 @@ h2 {
   margin-bottom: 15px;
 }
 
+/* --- FILAS Y CAMPOS --- */
 .fila {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 5px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .campo {
-  flex: 1;
-  min-width: 200px;
+  flex: 1 1 200px; /* flexible pero mínimo 200px */
+  max-width: 250px;
   display: flex;
   flex-direction: column;
 }
 
 label {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   font-weight: 600;
   color: #ffffff;
 }
 
+/* Inputs y selects */
 input[type="text"],
 textarea,
 select {
-  width: 90%;
-  padding: 8px 10px;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  font-size: 0.95rem;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: #313131;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9d9d9d;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background: #3b3b3b;
+  border-color: #4da3ff;
+  box-shadow: 0 0 12px rgba(77,163,255,0.5);
 }
 
 textarea {
@@ -60,27 +95,56 @@ textarea {
   resize: vertical;
 }
 
+/* --- CHECKBOXES --- */
 .campo-checkbox,
 .campo-contrato {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
+.grupo-checkbox {
+  flex-wrap: wrap;
+}
+
+.grupo-checkbox label {
+  flex: 1 1 150px;
+}
+
+/* --- BOTÓN SUBMIT --- */
 button[type="submit"] {
   display: block;
   width: 50%;
-  margin: 15px auto 0 auto;
-  padding: 10px 0;
-  background: #007bff;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
+  padding: 12px 0;
+  background: #4da3ff;
   color: #fff;
   font-weight: 600;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Estilo modal */
+button[type="submit"]:hover {
+  background: #1e7fe6;
+  transform: translateY(-2px);
+}
+
+/* --- ENLACE DE TÉRMINOS --- */
+.terminos-link {
+  background: none;
+  border: none;
+  color: #4da3ff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- MODAL --- */
 .modal-fondo {
   display: none;
   position: fixed;
@@ -93,30 +157,38 @@ button[type="submit"] {
 }
 
 .modal {
-  background: #fff;
-  padding: 20px 25px;
+  background: #1c1c1c;
+  padding: 30px;
   width: 90%;
   max-width: 500px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  color: #000;
+  border-radius: 16px;
+  box-shadow: 0 0 22px rgba(0,0,0,0.6);
+  color: #fff;
   text-align: justify;
   position: relative;
+  animation: scaleUp 0.25s ease-in-out;
 }
 
 .modal h3 {
   margin-top: 0;
   text-align: center;
   font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.modal p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #ccc;
 }
 
 .modal button.cerrar {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #007bff;
+  background: #4da3ff;
   border: none;
-  color: white;
+  color: #fff;
   padding: 5px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -124,17 +196,31 @@ button[type="submit"] {
 }
 
 .modal button.cerrar:hover {
-  background: #005fa3;
+  background: #1e7fe6;
 }
 
-/* Botón dentro del label */
-.terminos-link {
-  background: none;
-  border: none;
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 600;
-  padding: 0;
-  margin: 0;
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  form {
+    padding: 25px 20px;
+  }
+
+  .fila {
+    flex-direction: column;
+  }
+
+  button[type="submit"] {
+    width: 70%;
+  }
 }

@@ -1,18 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
 .user-wrapper {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background: #0f0f0f;
   font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
 }
 
-/* PANEL IZQUIERDO */
+/* PANEL IZQUIERDO FIJO */
 .user-left {
+  position: fixed;  /* <- Cambiar sticky por fixed */
+  top: 0;
+  left: 0;          /* asegurarte de que quede pegado al borde izquierdo */
   width: 30%;
+  height: 100vh;    /* ocupa toda la altura de la ventana */
   background-image: url("./Imagenes/fondo.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +28,7 @@
   gap: 35px;
   backdrop-filter: brightness(0.8) blur(2px);
   box-shadow: inset -6px 0 18px rgba(0, 0, 0, 0.45);
+  z-index: 2;
 }
 
 /* LOGO */
@@ -58,19 +66,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 95px;
   height: 95px;
-
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
-
   border-radius: 14px;
   text-decoration: none;
   color: #e6e6e6;
   font-weight: 600;
   text-align: center;
-
   transition: transform .25s ease, background .3s ease, box-shadow .3s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
@@ -100,12 +104,10 @@
   border-radius: 14px;
   font-weight: 700;
   cursor: pointer;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   transition: transform .25s ease, background .3s ease, box-shadow .3s ease;
 }
@@ -121,15 +123,21 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
-/* PANEL DERECHO */
 .user-right {
+  margin-left: 30%; /* coincide con el ancho del menú fijo */
   width: 70%;
-  background: #121212;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 60px;
   overflow-y: auto;
+  min-height: 100vh;
+  background: #121212;
+}
+
+.user-right::-webkit-scrollbar {
+  display: none;
+}
+.user-right {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* CONTENIDO CENTRAL */
@@ -144,14 +152,8 @@
   animation: fadeIn .6s ease-out;
 }
 
-/* Animación suave */
+/* ANIMACIÓN SUAVE */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

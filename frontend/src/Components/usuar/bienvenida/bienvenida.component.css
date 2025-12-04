@@ -1,32 +1,84 @@
-.gif-container {
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
+.bienvenida-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  background-image: url('./Imagenes/hello-hi.gif');
-  background-size: cover;
-  background-position: center;
-}
-
-.gif-bienvenida {
-    width: 180px;
-    border-radius: 10px;
-}
-
-/* Texto */
-.titulo-bienvenida {
-    font-size: 2rem;
-    margin-bottom: 10px;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    gap: 20px;
+    padding: 20px;
+
+    /* Ocupa como máximo toda la pantalla */
+    max-height: calc(100vh - 40px); /* 100vh menos padding top+bottom */
+    overflow: hidden; /* evita scroll innecesario */
+
+    animation: fadeIn 0.8s ease-out;
 }
 
+/* GIF */
+.gif-container {
+    width: 120px;
+    height: 120px;
+    background-image: url('./Imagenes/1.gif');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gif-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+}
+
+/* TÍTULO */
+.titulo-bienvenida {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+}
+
+/* TEXTO PRINCIPAL */
 .texto-bienvenida {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e6e6e6;
+    max-width: 600px;
 }
 
+/* TEXTO DE INDICACIÓN */
 .texto-indicacion {
     font-size: 1rem;
-    margin-top: 20px;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* ANIMACIÓN DE APARICIÓN */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* AJUSTE RESPONSIVO */
+@media (max-width: 768px) {
+    .gif-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .titulo-bienvenida {
+        font-size: 1.8rem;
+    }
+
+    .texto-bienvenida, .texto-indicacion {
+        font-size: 0.95rem;
+    }
 }

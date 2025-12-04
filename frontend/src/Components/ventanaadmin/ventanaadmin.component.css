@@ -1,15 +1,21 @@
 /* Contenedor principal */
-.user-wrapper {
+.admin-wrapper {
   display: flex;
   width: 100%;
   min-height: 100vh;
   background: #0f0f0f;
   font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
-/* PANEL IZQUIERDO */
-.user-left {
+/* PANEL IZQUIERDO - FIXED */
+.admin-left {
   width: 30%;
+  min-width: 280px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-image: url("./Imagenes/fondo.jpg");
   background-size: cover;
   background-position: center;
@@ -23,6 +29,7 @@
   backdrop-filter: brightness(0.85) blur(3px);
   box-shadow: inset -6px 0 20px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 /* LOGO */
@@ -44,7 +51,7 @@
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
 }
 
-/* CUADRÍCULA DEL MENÚ */
+/* MENU GRID */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -54,7 +61,7 @@
   justify-items: center;
 }
 
-/* BOTONES DEL MENÚ */
+/* MENU ITEMS */
 .menu-item {
   display: flex;
   flex-direction: column;
@@ -89,7 +96,7 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
-/* BOTÓN SALIR */
+/* BOTON SALIR */
 .logout-btn {
   width: 95px;
   height: 95px;
@@ -118,15 +125,16 @@
 }
 
 /* PANEL DERECHO */
-.user-right {
+.admin-right {
+  margin-left: 30%;
   width: 70%;
+  min-height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px;
   overflow-y: auto;
-  transition: all 0.3s ease;
 }
 
 /* CONTENIDO CENTRAL */
@@ -142,25 +150,22 @@
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Animación suave */
+/* ANIMACION */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ajuste responsivo */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .user-wrapper {
+  .admin-wrapper {
     flex-direction: column;
   }
-  .user-left, .user-right {
+  .admin-left, .admin-right {
     width: 100%;
+    position: relative;
+    margin-left: 0;
+    height: auto;
   }
   .menu-grid {
     grid-template-columns: repeat(4, 1fr);
