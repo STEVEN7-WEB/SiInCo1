@@ -131,9 +131,11 @@
 
 /* PANEL DERECHO */
 .docente-right {
-  margin-left: 30%;
+  position: fixed;      /* para que ocupe siempre el lado derecho */
+  top: 0;
+  right: 0;
   width: 70%;
-  min-height: 100vh;
+  height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;
@@ -146,12 +148,13 @@
 .content-box {
   width: 90%;
   max-width: 900px;
+  margin: 0 auto; /* <--- centrado horizontal */
   background: #1c1c1c;
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 0 20px rgba(0,0,0,0.45);
   color: #fff;
-  text-align: left;
+  text-align: center;
   animation: fadeIn 0.6s ease-out;
 }
 

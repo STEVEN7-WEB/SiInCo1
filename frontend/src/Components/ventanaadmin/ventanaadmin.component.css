@@ -130,9 +130,11 @@
 
 /* PANEL DERECHO */
 .admin-right {
-  margin-left: 30%;
+  position: fixed;      /* para que ocupe siempre el lado derecho */
+  top: 0;
+  right: 0;
   width: 70%;
-  min-height: 100vh;
+  height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;
