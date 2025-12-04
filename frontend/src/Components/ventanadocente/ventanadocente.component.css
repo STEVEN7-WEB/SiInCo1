@@ -1,4 +1,9 @@
 /* Contenedor principal */
+* {
+  box-sizing: border-box;
+}
+
+
 .docente-wrapper {
   display: flex;
   width: 100%;

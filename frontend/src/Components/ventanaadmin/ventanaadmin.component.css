@@ -1,4 +1,8 @@
 /* Contenedor principal */
+* {
+  box-sizing: border-box;
+}
+
 .admin-wrapper {
   display: flex;
   width: 100%;
