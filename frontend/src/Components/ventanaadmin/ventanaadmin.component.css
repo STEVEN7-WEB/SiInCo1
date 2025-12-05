@@ -1,39 +1,40 @@
-/* Contenedor principal */
+/* --- RESET --- */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* --- WRAPPER PRINCIPAL --- */
 .admin-wrapper {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background: #0f0f0f;
   font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
+  background: #0f0f0f;
 }
 
-/* PANEL IZQUIERDO - FIXED */
+/* --- PANEL IZQUIERDO FIJO --- */
 .admin-left {
-  width: 30%;
-  min-width: 280px;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+  width: 30%;
+  min-width: 280px;
+  height: 100vh;
   background-image: url("./Imagenes/fondo.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 45px 20px;
   justify-content: flex-start;
+  padding: 45px 20px;
   gap: 35px;
   backdrop-filter: brightness(0.85) blur(3px);
   box-shadow: inset -6px 0 20px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
 /* LOGO */
@@ -55,7 +56,7 @@
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
 }
 
-/* MENU GRID */
+/* CUADRÍCULA DEL MENÚ */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -65,7 +66,7 @@
   justify-items: center;
 }
 
-/* MENU ITEMS */
+/* BOTONES DEL MENÚ */
 .menu-item {
   display: flex;
   flex-direction: column;
@@ -100,7 +101,7 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
-/* BOTON SALIR */
+/* BOTÓN SALIR */
 .logout-btn {
   width: 95px;
   height: 95px;
@@ -128,19 +129,18 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
-/* PANEL DERECHO */
+/* --- PANEL DERECHO --- */
 .admin-right {
-  position: fixed;      /* para que ocupe siempre el lado derecho */
-  top: 0;
-  right: 0;
+  margin-left: 30%;
   width: 70%;
-  height: 100vh;
+  min-height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px;
   overflow-y: auto;
+  transition: all 0.3s ease;
 }
 
 /* CONTENIDO CENTRAL */
@@ -152,27 +152,34 @@
   padding: 40px;
   box-shadow: 0 0 25px rgba(0,0,0,0.45);
   color: #fff;
-  text-align: center;
+  text-align: left;
   animation: fadeIn 0.6s ease-out;
 }
 
-/* ANIMACION */
+/* Clase extra para repetir animación si se recarga contenido */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ANIMACIÓN */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
+/* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
   .admin-wrapper {
     flex-direction: column;
   }
+
   .admin-left, .admin-right {
     width: 100%;
     position: relative;
     margin-left: 0;
     height: auto;
   }
+
   .menu-grid {
     grid-template-columns: repeat(4, 1fr);
     max-width: 100%;

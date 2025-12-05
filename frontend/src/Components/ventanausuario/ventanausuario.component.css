@@ -1,7 +1,11 @@
+/* --- RESET --- */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* --- WRAPPER PRINCIPAL --- */
 .user-wrapper {
   display: flex;
   width: 100%;
@@ -10,25 +14,27 @@
   background: #0f0f0f;
 }
 
-/* PANEL IZQUIERDO FIJO */
+/* --- PANEL IZQUIERDO FIJO --- */
 .user-left {
-  position: fixed;  /* <- Cambiar sticky por fixed */
+  position: fixed;
   top: 0;
-  left: 0;          /* asegurarte de que quede pegado al borde izquierdo */
+  left: 0;
   width: 30%;
-  height: 100vh;    /* ocupa toda la altura de la ventana */
+  min-width: 280px;
+  height: 100vh;
   background-image: url("./Imagenes/fondo.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 45px 20px;
   justify-content: flex-start;
+  padding: 45px 20px;
   gap: 35px;
   backdrop-filter: brightness(0.8) blur(2px);
   box-shadow: inset -6px 0 18px rgba(0, 0, 0, 0.45);
   z-index: 2;
+  transition: all 0.3s ease;
 }
 
 /* LOGO */
@@ -42,7 +48,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: transform .35s ease, box-shadow .35s;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .logo-box:hover {
@@ -75,8 +81,8 @@
   color: #e6e6e6;
   font-weight: 600;
   text-align: center;
-  transition: transform .25s ease, background .3s ease, box-shadow .3s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-item span {
@@ -109,7 +115,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  transition: transform .25s ease, background .3s ease, box-shadow .3s ease;
+  transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logout-btn span {
@@ -123,18 +129,18 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
+/* --- PANEL DERECHO --- */
 .user-right {
-  position: fixed;      /* para que ocupe siempre el lado derecho */
-  top: 0;
-  right: 0;
-  width: 70%;           /* ocupa el 70% del ancho */
-  height: 100vh;        /* ocupa toda la altura */
+  margin-left: 30%;
+  width: 70%;
+  min-height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px;        /* padding interno */
-  overflow-y: auto;     /* scroll si el contenido excede la altura */
+  padding: 60px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
 }
 
 /* CONTENIDO CENTRAL */
@@ -150,26 +156,27 @@
   animation: fadeIn 0.6s ease-out;
 }
 
-/* ANIMACIÓN SUAVE */
+/* ANIMACION */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
+/* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
-  .docente-wrapper {
+  .user-wrapper {
     flex-direction: column;
   }
-  .docente-left, .docente-right {
+
+  .user-left, .user-right {
     width: 100%;
     position: relative;
     margin-left: 0;
     height: auto;
   }
+
   .menu-grid {
     grid-template-columns: repeat(4, 1fr);
     max-width: 100%;
   }
 }
-

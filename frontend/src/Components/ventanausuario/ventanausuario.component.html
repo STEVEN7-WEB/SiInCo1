@@ -1,8 +1,8 @@
 <div class="user-wrapper">
 
+  <!-- PANEL IZQUIERDO -->
   <div class="user-left">
-    <div class="logo-box">
-    </div>
+    <div class="logo-box"></div>
 
     <nav class="menu-grid">
       <button class="menu-item" (click)="navegar('crear-solicitud')">
@@ -37,8 +37,10 @@
     </nav>
   </div>
 
+  <!-- PANEL DERECHO -->
   <div class="user-right">
-    <div class="content-box">
+    <!-- Contenido dinámico animado -->
+    <div class="content-box" [@fadeInAnimation]>
       <router-outlet></router-outlet>
     </div>
   </div>

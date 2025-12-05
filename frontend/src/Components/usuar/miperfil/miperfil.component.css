@@ -1,69 +1,98 @@
 .perfil-container {
   max-width: 900px;
   margin: 40px auto;
-  padding: 0 15px;
+  padding: 0 20px;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .title {
   text-align: center;
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #ffffff; /* letras blancas */
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .perfil-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  gap: 20px;
 }
 
 .perfil-item {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  /* Quitamos animación */
+  background: #1c1c1c;
+  border: 1px solid #2e2e2e;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.perfil-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
 .item-label {
   font-weight: 600;
-  font-size: 0.9em;
-  color: #ffffff; /* letras blancas */
-  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #b8b8b8;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .item-value {
-  font-size: 1.1em;
-  color: #ffffff; /* letras blancas */
+  font-size: 1.1rem;
+  color: #ffffff;
+  word-wrap: break-word;
 }
 
 .buttons {
   grid-column: 1 / -1;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  /* Quitamos transición */
+  transition: background 0.3s, transform 0.2s;
+  margin: 0 8px;
 }
 
 .btn-primary {
-  background: #2e86de;
-  color: white;
+  background: #4da3ff;
+  color: #fff;
 }
 
 .btn-primary:hover {
-  background: #1e5fa8;
+  background: #1e7fe6;
+  transform: translateY(-2px);
 }
 
 .cargando-text {
   text-align: center;
-  font-size: 1.2em;
-  color: #ffffff; /* letras blancas */
+  font-size: 1.3rem;
+  color: #ffffff;
   margin-top: 30px;
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .perfil-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 80%;
+    margin: 10px auto;
+  }
 }
