@@ -46,16 +46,16 @@ export class CrearSolicitudComponent implements OnInit {
     if (this.formularioMantenimiento.valid) {
       this.http.post(this.apiUrl, this.formularioMantenimiento.value).subscribe({
         next: () => {
-          alert('✅ Solicitud enviada correctamente');
+          this.showToast("✔ Solicitud enviada correctamente");
           this.formularioMantenimiento.reset();
         },
         error: (err) => {
           console.error('Error:', err);
-          alert('❌ Ocurrió un error al enviar la solicitud');
+          this.showToast("❌ Error al enviar la solicitud");
         }
       });
     } else {
-      alert('⚠️ Por favor completa todos los campos requeridos');
+      this.showToast("⚠️ Completa todos los campos obligatorios");
     }
   }
 
@@ -67,5 +67,19 @@ export class CrearSolicitudComponent implements OnInit {
   cerrarModal() {
     const modal = document.getElementById('modalTerminos');
     if (modal) modal.style.display = 'none';
+  }
+
+  showToast(mensaje: string) {
+    const toast = document.getElementById('toast');
+    const texto = document.getElementById('toastMensaje');
+
+    if (toast && texto) {
+      texto.textContent = mensaje;
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
   }
 }

@@ -38,6 +38,7 @@ import { CargarusuariosComponent } from './Components/admin/cargarusuarios/carga
 import { VerinventarioComponent } from './Components/admin/verinventario/verinventario.component';
 import { VerreportesComponent } from './Components/admin/verreportes/verreportes.component';
 import { Manualdeayuda } from './Components/admin/manualdeayuda/manualdeayuda.component'; 
+import { ControlEspecial } from './Components/admin/control-especial/control-especial.component'; 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter([
@@ -89,7 +90,8 @@ bootstrapApplication(AppComponent, {
           { path: 'cargar-usuarios', component: CargarusuariosComponent },
           { path: 'revisar-inventario', component: VerinventarioComponent},
           { path: 'reportes', component: VerreportesComponent},
-          { path: 'ayuda', component: Manualdeayuda}
+          { path: 'ayuda', component: Manualdeayuda},
+          { path: 'control-especial', component: ControlEspecial}
         ]
       },
     ]),

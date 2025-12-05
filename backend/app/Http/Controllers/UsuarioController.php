@@ -83,5 +83,40 @@ class UsuarioController extends Controller
         if (!$user) return response()->json(['message' => 'Usuario no encontrado'], 404);
         return response()->json($user);
     }
+public function index() {
+    return User::all();
+}
+
+public function destroy($id) {
+    $u = User::find($id);
+    if (!$u) {
+        return response()->json(["error" => "No existe"], 404);
+    }
+
+    $u->delete();
+    return response()->json(["mensaje" => "Eliminado"]);
+}
+
+public function update(Request $request, $id)
+{
+    $user = User::find($id);
+    if (!$user) return response()->json(['message' => 'Usuario no encontrado'], 404);
+
+    $data = $request->all();
+
+    if (isset($data['contrasena']) && !empty($data['contrasena'])) {
+        $data['password'] = bcrypt($data['contrasena']);
+    }
+
+    unset($data['contrasena']);
+
+    $user->update($data);
+
+    return response()->json(['message' => 'Actualizado correctamente']);
+}
+
+
+
+
     
 }

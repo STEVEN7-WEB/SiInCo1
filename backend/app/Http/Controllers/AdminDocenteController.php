@@ -78,4 +78,48 @@ class AdminDocenteController extends Controller
             'usuario' => $usuario
         ], 200);
     }
+    public function index()
+{
+    return response()->json(AdminDocente::all());
+}
+
+public function show($id)
+{
+    $doc = AdminDocente::find($id);
+    if (!$doc) {
+        return response()->json(['error' => 'No encontrado'], 404);
+    }
+    return response()->json($doc);
+}
+
+public function update(Request $request, $id)
+{
+    $doc = AdminDocente::find($id);
+    if (!$doc) return response()->json(['error' => 'No encontrado'], 404);
+
+    $data = $request->all();
+
+    // Si viene contraseña desde Angular (como "contrasena")
+    if (isset($data['contrasena']) && !empty($data['contrasena'])) {
+        $data['password'] = Hash::make($data['contrasena']);
+    }
+
+    // Evitar guardar el campo temporal "contrasena"
+    unset($data['contrasena']);
+
+    $doc->update($data);
+
+    return response()->json(['message' => 'Actualizado correctamente']);
+}
+
+
+public function destroy($id)
+{
+    $doc = AdminDocente::find($id);
+    if (!$doc) return response()->json(['error' => 'No encontrado'], 404);
+
+    $doc->delete();
+    return response()->json(['message' => 'Eliminado']);
+}
+
 }

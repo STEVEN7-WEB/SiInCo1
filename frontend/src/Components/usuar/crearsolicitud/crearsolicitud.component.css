@@ -223,4 +223,31 @@ button[type="submit"]:hover {
   button[type="submit"] {
     width: 70%;
   }
+
 }
+
+/* --- TOAST --- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(77,163,255,0.25);
+  border: 1px solid rgba(77,163,255,0.6);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+

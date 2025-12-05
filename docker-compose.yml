@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: laravel_app
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./backend:/var/www
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: angular_app
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

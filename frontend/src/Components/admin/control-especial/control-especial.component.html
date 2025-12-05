@@ -1,0 +1,134 @@
+<!-- ============================
+   PANTALLA INICIO
+============================ -->
+<div class="pantalla-inicio" *ngIf="pantalla === 'inicio'">
+  <h2 class="titulo">Panel de Control Especial</h2>
+
+  <div class="botones-seleccion">
+    <button class="btn-opcion" (click)="seleccionar('usuarios')">
+      👤 Usuarios
+    </button>
+
+    <button class="btn-opcion" (click)="seleccionar('docentes')">
+      🎓 Docentes / Admin
+    </button>
+  </div>
+</div>
+
+<!-- ============================
+   LISTA
+============================ -->
+<div class="contenedor-lista" *ngIf="pantalla === 'lista'">
+
+  <button class="btn-volver" (click)="volverInicio()">⬅ Volver</button>
+
+  <h2 class="titulo-lista">
+    {{ tipo === 'usuarios' ? 'Usuarios' : 'Docentes / Administradores' }}
+  </h2>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <!-- USUARIOS -->
+        <th *ngIf="tipo === 'usuarios'">Nombre</th>
+        <th *ngIf="tipo === 'usuarios'">Número de control</th>
+
+        <!-- DOCENTES/Admin -->
+        <th *ngIf="tipo === 'docentes'">Tipo</th>
+        <th *ngIf="tipo === 'docentes'">Nombre</th>
+        <th *ngIf="tipo === 'docentes'">Usuario</th>
+        <th *ngIf="tipo === 'docentes'">Correo</th>
+
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of obtenerActuales()">
+
+        <!-- USUARIOS -->
+        <td *ngIf="tipo === 'usuarios'">{{ item.nombre }}</td>
+        <td *ngIf="tipo === 'usuarios'">{{ item.numControl }}</td>
+
+        <!-- DOCENTES/ADMIN -->
+        <td *ngIf="tipo === 'docentes'">
+          <span 
+            class="tag"
+            [class.admin]="item.tipo === 'admin'" 
+            [class.docente]="item.tipo === 'docente'">
+            {{ item.tipo }}
+          </span>
+        </td>
+
+        <td *ngIf="tipo === 'docentes'">{{ item.nombre }}</td>
+        <td *ngIf="tipo === 'docentes'">{{ item.usuario }}</td>
+        <td *ngIf="tipo === 'docentes'">{{ item.correo }}</td>
+
+        <!-- ACCIONES -->
+        <td class="acciones">
+          <button class="btn-accion editar" (click)="abrirModalEditar(item)">✏</button>
+          <button class="btn-accion eliminar" (click)="abrirModalEliminar(item.id)">🗑</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================
+   MODAL EDITAR
+============================ -->
+<div class="modal" *ngIf="modalVisible">
+  <div class="modal-content">
+    <h3>Editar {{ tipo === 'usuarios' ? 'Usuario' : 'Docente / Admin' }}</h3>
+
+    <!-- USUARIOS -->
+    <div *ngIf="tipo === 'usuarios'">
+      <label>Contraseña</label>
+      <input type="password" [(ngModel)]="itemEditando.contrasena">
+
+      <label>Respuesta</label>
+      <input type="text" [(ngModel)]="itemEditando.respuesta_seguridad">
+    </div>
+
+    <!-- DOCENTES -->
+    <div *ngIf="tipo === 'docentes'">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="itemEditando.nombre">
+
+      <label>Usuario</label>
+      <input type="text" [(ngModel)]="itemEditando.usuario">
+
+      <label>Correo</label>
+      <input type="email" [(ngModel)]="itemEditando.correo">
+      <label>Contraseña</label>
+        <input type="password" [(ngModel)]="itemEditando.contrasena">
+    </div>
+
+    <div class="modal-buttons">
+      <button class="guardar" (click)="guardarCambios()">Guardar</button>
+      <button class="cancelar" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+   MODAL ELIMINAR
+============================ -->
+<div class="modal" *ngIf="modalEliminarVisible">
+  <div class="modal-content">
+    <h3>¿Eliminar elemento?</h3>
+
+    <div class="modal-buttons">
+      <button class="eliminar" (click)="confirmarEliminar()">Eliminar</button>
+      <button class="cancelar" (click)="cerrarModalEliminar()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+   TOAST
+============================ -->
+<div class="toast" [class.activo]="toastActivo">
+  {{ toastMensaje }}
+</div>

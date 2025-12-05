@@ -4,6 +4,7 @@
     <div class="logo-box"></div>
 
     <nav class="menu-grid">
+
       <button class="menu-item" (click)="navegar('revisar-solicitudes')">
         <span>📋</span>
         <p>Revisar Solicitudes</p>
@@ -33,9 +34,19 @@
         <span>❓</span>
         <p>Ayuda</p>
       </button>
+
+      <!-- ⭐ BOTÓN EXCLUSIVO PARA steven2311 ⭐ -->
+      <button 
+        class="menu-item" 
+        *ngIf="esElAdminPrincipal()"
+        (click)="navegar('control-especial')">
+        <span>🛡️</span>
+        <p>Manejo Cuentas</p>
+      </button>
+
     </nav>
 
-    <!-- Botón de salir al final de la columna -->
+    <!-- Botón de salir -->
     <button class="menu-item logout-btn" (click)="cerrarSesion()">
       <span>🚪</span>
       <p>Salir</p>

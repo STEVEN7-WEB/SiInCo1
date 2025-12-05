@@ -12,14 +12,25 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class VentanaadminComponent {
 
-  constructor(private router: Router) {}
+  adminLogeado: any = null;
+
+  constructor(private router: Router) {
+    // Aquí se obtiene el ADMIN real que inició sesión
+    const data = localStorage.getItem('admin');
+    this.adminLogeado = data ? JSON.parse(data) : null;
+  }
+
+  esElAdminPrincipal(): boolean {
+    // Solo este usuario verá el botón especial
+    return this.adminLogeado?.usuario === 'steven2311';
+  }
 
   navegar(rutaHija: string): void {
     this.router.navigate([`/admin/${rutaHija}`]);
   }
 
   cerrarSesion(): void {
-    localStorage.removeItem('adminActual');
+    localStorage.removeItem('admin');
     this.router.navigate(['/inicio-sesion']);
   }
 }
